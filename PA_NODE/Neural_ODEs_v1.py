@@ -228,7 +228,7 @@ class Piecewise_Auto_NODE(Simple_FeedforwardNN):
         i_final = self.sigmoid(t - self.breakpoints[-1]).repeat(self.variables).unsqueeze(1)
         indicator = torch.cat([output, i_final], dim=1).unsqueeze(0) # shape (1, spatial_dim, num_intervals)
         
-
+        self.breakpoints[1:-1] = self.break_params.detach() #Updating breakpoints attribute to current break_params values.
         net_out2 = net_out*indicator # shape (num_traj, spatial_dim, num_intervals) x (1, spatial_dim, num_intervals) -> (num_traj, spatial_dim, num_intervals)
         net_out_final = torch.sum(net_out2, dim=2) # shape (num_traj, spatial_dim)
         return net_out_final
