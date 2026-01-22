@@ -9,7 +9,10 @@ File Containing ToDo list:
 
 
 Main: 
-1. Implement Parareal into the PA-NODE
+1. Implement Parareal into the PA-NODE (done)
+2. Custom loss function? (done)
+3. Learn with fixed partition vs moving - Does partition improve performance (done)
+
 2. Learn lorenz between two parameters 
 3. Learn Lorenz between multiple parameters. 
 4. Trajectories of varying length?
