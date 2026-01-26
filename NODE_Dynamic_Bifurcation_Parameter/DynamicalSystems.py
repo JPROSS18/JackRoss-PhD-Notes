@@ -15,42 +15,17 @@ import torch.nn as nn
 from tqdm import tqdm
 from ipywidgets import interact, IntSlider
 
+class DynamicalSystem:
+    def __init__(self):
+        pass
 
-class Lorenz:
-    '''
-    Class for the Lorenz System of Differential Equations
-    --------------
-    Parameters:
-    rho : function of time
-        The rho parameter as a function of time
-    sigma : float
-        The sigma parameter
-    beta : float
-        The beta parameter
-    --------------
-    Methods:
-    f(t, x) : function      
-    '''
-    def __init__(self, rho = lambda t: 14, sigma = 10, beta = 8/3):
-        #Setting system parameters
-        self.sigma = sigma
-        self.beta = beta
-        self.rho = rho #should be a 1D function of time
-
-    #Differential Equation
     def f(self, t, x):
-        dx1_dt = self.sigma*(x[1]-x[0])
-        dx2_dt = x[0]*(self.rho(t) - x[2]) - x[1]
-        dx3_dt = x[0]*x[1] - self.beta*x[2]
-        
-        xdot = [dx1_dt,
-                dx2_dt,
-                dx3_dt ]
+        #Constant function, to be overridden by subclasses
+        return 1
 
-        return np.array(xdot)
     def solve(self, x0, t_span, dt):
         '''
-        Solves the Lorenz system using scipy's solve_ivp. Modified to allow for multiple initial conditions.
+        Solves the system using scipy's solve_ivp by RK45. Modified to allow for multiple initial conditions.
 
         Returns a numpy array of shape (num_timepoints, num_trajectories, system dimension)
         --------------
@@ -74,5 +49,62 @@ class Lorenz:
         
         sol = np.concatenate(list, axis=1)
 
-
         return sol
+    
+
+class DynamicalSystem_torch(DynamicalSystem):
+    def __init__(self):
+        super().__init__()
+        pass
+
+    def f(self, t, x): 
+        return torch.tensor(self.f(t, x.numpy()), dtype=torch.float32)
+    
+    def solve(self, x0, t_span, dt):
+        '''
+        Solves the system using torchdiffeq's odeint. Modified to allow for multiple initial conditions.
+
+        Returns a torch tensor of shape (num_timepoints, num_trajectories, system dimension)
+        --------------
+        Parameters:
+        x0 : torch tensor
+            Tensor of initial conditions of shape (system dimension, num_trajectories)
+        dt : float
+            The time step for the solution
+        t_span : tuple
+            The time span for the solution (t0, t_end)
+     
+        --------------
+        '''
+        t = torch.arange(t_span[0], t_span[1], dt)
+        sol = odeint(func=self.f, y0=x0, t=t, method='rk4', options={'step_size': dt})  # shape (num_timepoints, system dimension, num_trajectories)
+        return sol
+
+
+#Systems
+class Lorenz(DynamicalSystem_torch): 
+    def __init__(self, sigma=10, beta=8/3, rho=28):
+        super().__init__()
+        self.sigma = sigma
+        self.beta = beta
+        self.rho = rho
+
+    def f(self, t, x):
+        dxdt = self.sigma * (x[1] - x[0])
+        dydt = x[0] * (self.rho - x[2]) - x[1]
+        dzdt = x[0] * x[1] - self.beta * x[2]
+        return torch.tensor([dxdt.numpy(), dydt.numpy(), dzdt.numpy()], dtype=torch.float32)
+    
+class Rössler(DynamicalSystem_torch):
+    def __init__(self, a=0.2, b=0.2, c=5.7):
+        super().__init__()
+        self.a = a
+        self.b = b
+        self.c = c
+
+    def f(self, t, x):
+        dxdt = -x[1] - x[2]
+        dydt = x[0] + self.a * x[1]
+        dzdt = self.b + x[2] * (x[0] - self.c)
+        return torch.tensor([dxdt.numpy(), dydt.numpy(), dzdt.numpy()], dtype=torch.float32)
+    
