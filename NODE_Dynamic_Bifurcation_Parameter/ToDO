@@ -1,8 +1,12 @@
 
 I want to learning a function of the form $\dot x = f(x(t), r(t))$. 
 
-1. Code to learn dynamic bifurcation
-2. Vary network size
+ Code to learn dynamic bifurcation (still in progress)
+ Vary network size (did nothing)
+
+ 1. Learing hopf bifurcation
+
+
 3. Optimise neural odes for speed
 -adjoint vs not 
 - wrapper vs in forward. 
