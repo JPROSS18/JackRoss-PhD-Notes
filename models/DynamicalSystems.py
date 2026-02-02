@@ -102,3 +102,38 @@ class Rössler(DynamicalSystem_torch):
         dzdt = self.b + x[2] * (x[0] - self.c)
         return torch.tensor([dxdt.numpy(), dydt.numpy(), dzdt.numpy()], dtype=torch.float32)
     
+class Hopf(DynamicalSystem_torch):
+    def __init__(self, rho=1.0, alpha=1.0, omega = 1.0, beta=1.0):
+        super().__init__()
+        self.rho = rho 
+        self.alpha = alpha
+        self.beta = beta
+        self.omega = omega
+        self.gamma = 0.1 #Rate of change of bifurcation parameter
+        self.system_dim = 2
+
+
+    def f(self, t, x): 
+        #x sould be (traj, dim)
+        if not isinstance(x, torch.Tensor):
+            raise TypeError(f"Expected torch.Tensor, got {type(x)}")
+        elif len(x.shape) == 1:
+            if x.shape[0] != self.system_dim: 
+                raise ValueError("x must have dimension of 2")
+            else:
+                x = x.unsqueeze(0)
+        elif len(x.shape) == 2: 
+            if x.shape[1] != self.system_dim: 
+                raise ValueError("x.shape[1] must have dimension of ", self.system_dim)
+        else:
+            raise ValueError("Input tensor x cannot have more than 2 dimensions (trajectory, dimension)")
+        
+        xdot = self.rho * x[:, 0] - self.omega * x[:, 1] + (self.alpha*x[:, 0] - self.beta * x[:, 1])*(x[:, 0]**2 + x[:, 1]**2) #traj
+        ydot = self.omega * x[:, 0] + self.rho * x[:, 1] + (self.beta*x[:, 0] + self.alpha * x[:, 1])*(x[:, 0]**2 + x[:, 1]**2) #(traj)
+        return torch.cat([xdot.unsqueeze(1), ydot.unsqueeze(1)], dim = 1)
+    
+    def na_f(self, t, x):
+        xdot = x[:, 2] * x[:, 0] - self.omega * x[:, 1] + (self.alpha*x[:, 0] - self.beta * x[:, 1])*(x[:, 0]**2 + x[:, 1]**2) #traj
+        ydot = self.omega * x[:, 0] + x[:, 2] * x[:, 1] + (self.beta*x[:, 0] + self.alpha * x[:, 1])*(x[:, 0]**2 + x[:, 1]**2) #(traj)
+        rdot = self.gamma*torch.ones_like(x[:, 0]) #Rate of change of bifurcation parameter
+        return torch.cat([xdot.unsqueeze(1), ydot.unsqueeze(1), rdot.unsqueeze(1)], dim = 1)
