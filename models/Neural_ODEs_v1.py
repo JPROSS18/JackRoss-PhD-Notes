@@ -107,6 +107,35 @@ class NODE(Simple_FeedforwardNN):
         out = self.output_layer(out) # out2 shape (time, num_traj, output_dim)
         return out 
     
+    
+class NODE2(Simple_FeedforwardNN):
+    '''
+    Class that creates an Neural ODE. 
+    '''
+    def __init__(self, input_dim: int, output_dim: int, depth: int, hidden_dim: int, activation_func: nn.Module = nn.Tanh()):
+        super().__init__(input_dim=input_dim, depth=depth, width=hidden_dim, output_dim=output_dim, activation_func=activation_func)
+        if input_dim < output_dim:
+            raise ValueError("Input dimension must be greater than or equal to output dimension in a neural ODE.")
+        else:
+            self.hidden_dim        = hidden_dim #width is number of neurons per hidden layer
+            self.depth             = depth #Number of internal hidden layers
+            self.input_dim         = input_dim
+            self.output_dim        = output_dim
+            self.activation_func   = activation_func
+
+            #self.input_layer = nn.Linear(input_dim, hidden_dim)
+            #self.output_layer = nn.Linear(hidden_dim, output_dim)
+
+            #Integration settings
+            
+    def forward(self, t, x): #x shoudl be (num_traj, spatial_dim)
+        '''Takes t and x as input, where x is a pytorch tensor with shape: [trajectories, dim].
+        
+        input x is hidden state. 
+        '''
+        out = self.network(x) #(num_traj, spatial_dim+drivers)
+        return out
+
 
 
 class NODE_Bifurcation(Simple_FeedforwardNN):
