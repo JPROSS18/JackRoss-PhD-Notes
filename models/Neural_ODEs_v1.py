@@ -135,7 +135,49 @@ class NODE2(Simple_FeedforwardNN):
         '''
         out = self.network(x) #(num_traj, spatial_dim+drivers)
         return out
+    
+    
+class Trainer:
+    def __init__(self, model, data_loader, optimizer, loss_fn, t_eval, dt):
+        self.model = model
+        self.data_loader = data_loader
+        self.optimizer = optimizer
+        self.loss_fn = loss_fn
+        self.t_eval = t_eval
+        self.dt = dt
+        self.loss_list = []
+        self.epoch_trained = 0
 
+        pred_x = odeint(func=self.model, y0=data_loader.dataset[:, 0, :], t=self.t_eval, method='rk4', options={'step_size': self.dt})
+        loss = self.loss_fn(pred_x[-1, :, :], data_loader.dataset[:, 1, :])
+        self.loss_list.append(loss.item())
+
+    def loss(self):
+        pred_x = odeint(func=self.model, y0=self.data_loader.dataset[:, 0, :], t=self.t_eval, method='rk4', options={'step_size': self.dt})
+        loss = self.loss_fn(pred_x[-1, :, :], self.data_loader.dataset[:, 1, :])
+        return loss.item()
+
+    def train(self, num_epochs, t_eval):
+        
+        for epoch in tqdm(range(num_epochs), desc= "Current Loss: " + str(self.loss_list[-1]) + "  - Epochs: " + str(self.epoch_trained)):
+            self.epoch_trained += 1
+            epoch_loss = 0.0
+            for i, (x_batch) in enumerate(self.data_loader): #x_batch shape (num_traj, 2, dim)
+
+                self.optimizer.zero_grad()
+                
+                #ODE integration to get predictions + compute loss
+                pred_x = odeint(func=self.model, y0=x_batch[:, 0, :], t=self.t_eval, method='rk4', options={'step_size': self.dt})
+                loss = self.loss_fn(pred_x[-1, :, :], x_batch[:, 1, :])
+                epoch_loss += loss.item()
+                
+                #Backpropagation and optimization step
+                loss.backward()
+                self.optimizer.step()
+
+            avg_epoch_loss = epoch_loss / len(self.data_loader)
+            self.loss_list.append(avg_epoch_loss)
+    
 
 
 class NODE_Bifurcation(Simple_FeedforwardNN):

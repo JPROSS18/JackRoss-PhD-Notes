@@ -87,7 +87,8 @@ class Lorenz(DynamicalSystem_torch):
         dxdt = self.sigma * (x[1] - x[0])
         dydt = x[0] * (self.rho - x[2]) - x[1]
         dzdt = x[0] * x[1] - self.beta * x[2]
-        return torch.tensor([dxdt.numpy(), dydt.numpy(), dzdt.numpy()], dtype=torch.float32)
+        
+        return torch.stack([dxdt, dydt, dzdt], dim=0)
     
 class Rössler(DynamicalSystem_torch):
     def __init__(self, a=0.2, b=0.2, c=5.7):
@@ -100,7 +101,7 @@ class Rössler(DynamicalSystem_torch):
         dxdt = -x[1] - x[2]
         dydt = x[0] + self.a * x[1]
         dzdt = self.b + x[2] * (x[0] - self.c)
-        return torch.tensor([dxdt.numpy(), dydt.numpy(), dzdt.numpy()], dtype=torch.float32)
+        return torch.stack([dxdt, dydt, dzdt], dim=0)
     
 class Hopf(DynamicalSystem_torch):
     def __init__(self, rho=1.0, alpha=1.0, omega = 1.0, beta=1.0):
@@ -137,3 +138,43 @@ class Hopf(DynamicalSystem_torch):
         ydot = self.omega * x[:, 0] + x[:, 2] * x[:, 1] + (self.beta*x[:, 0] + self.alpha * x[:, 1])*(x[:, 0]**2 + x[:, 1]**2) #(traj)
         rdot = self.gamma*torch.ones_like(x[:, 0]) #Rate of change of bifurcation parameter
         return torch.cat([xdot.unsqueeze(1), ydot.unsqueeze(1), rdot.unsqueeze(1)], dim = 1)
+
+
+
+
+#Functions for coordinate transformations
+def cartesian_to_polar(x, y):
+    """
+    Convert Cartesian coordinates to polar coordinates.
+    
+    Parameters:
+    x, y: float or array-like
+        Cartesian coordinates
+    
+    Returns:
+    r: float or array
+        Radius (distance from origin)
+    theta: float or array
+        Angle in radians (from positive x-axis)
+    """
+    r = np.sqrt(x**2 + y**2)
+    theta = np.arctan2(y, x)
+    return r, theta
+
+def polar_to_cartesian(r, theta):
+    """
+    Convert polar coordinates to Cartesian coordinates.
+    
+    Parameters:
+    r: float or array-like
+        Radius (distance from origin)
+    theta: float or array-like
+        Angle in radians (from positive x-axis)
+    
+    Returns:
+    x, y: float or array
+        Cartesian coordinates
+    """
+    x = r * np.cos(theta)
+    y = r * np.sin(theta)
+    return x, y
