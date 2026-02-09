@@ -15,7 +15,7 @@ class DynamicalSystem:
 
     def f(self, t, x):
         #Constant function, to be overridden by subclasses
-        return 1
+        return 0
 
     def solve(self, x0, t_span, dt):
         '''
@@ -47,12 +47,44 @@ class DynamicalSystem:
     
 
 class DynamicalSystem_torch(DynamicalSystem):
-    def __init__(self):
+    def __init__(self, dim):
         super().__init__()
-        pass
+        self.system_dim = dim
+
+
+    def f_tests(self, t, x, driven = False):
+        '''
+        Tests for the function f to ensure that the input x is in the correct format.
+
+        driven is a boolean that indicates whether the system is being driven by an external variable. If True, the function will expect x to have an additional dimension for the driver variable.
+        '''
+        if driven:
+            system_dim = self.system_dim + 1
+        else:
+            system_dim = self.system_dim
+        #x sould be (traj, dim)
+        if not isinstance(x, torch.Tensor):
+            raise TypeError(f"Expected torch.Tensor, got {type(x)}")
+        
+        elif len(x.shape) == 1: # When 1d tensor passed. Assume 1 trajectory.  
+            if x.shape[0] != system_dim: 
+                raise ValueError("Input x must have dimension of ", system_dim, "but got dimension of ", x.shape[0])
+            else:
+                x = x.unsqueeze(0) # Add dimension to make it (1, dim)
+                return t, x # Return t and x for further processing in f.
+        elif len(x.shape) == 2: 
+            if x.shape[1] != system_dim: 
+                raise ValueError("input x must have dimension of ", system_dim, "but got dimension of ", x.shape[1])
+            else:
+                return t, x
+        else:
+            raise ValueError("Input tensor x cannot have more than 2 dimensions (trajectory, dimension) but has ", len(x.shape))
 
     def f(self, t, x): 
+        t, x = self.f_tests(t, x)
+
         return torch.tensor(self.f(t, x.numpy()), dtype=torch.float32)
+    
     
     def solve(self, x0, t_span, dt):
         '''
@@ -62,7 +94,7 @@ class DynamicalSystem_torch(DynamicalSystem):
         --------------
         Parameters:
         x0 : torch tensor
-            Tensor of initial conditions of shape (system dimension, num_trajectories)
+            Tensor of initial conditions of shape (num_trajectories, system dimension)
         dt : float
             The time step for the solution
         t_span : tuple
@@ -78,78 +110,72 @@ class DynamicalSystem_torch(DynamicalSystem):
 #Systems
 class Lorenz(DynamicalSystem_torch): 
     def __init__(self, sigma=10, beta=8/3, rho=28):
-        super().__init__()
+        super().__init__(dim=3)
         self.sigma = sigma
         self.beta = beta
         self.rho = rho
 
-        self.na_rate = 0
+        self.drive_rate = 0
 
-    def f(self, t, x):
+    def f(self, t, x): # shape should be 
+        t, x = self.f_tests(t, x) 
+        #print("x shape in f: ", x.shape) # Expecting (num_trajectories, system dimension)
         dxdt = self.sigma * (x[:, 1] - x[:, 0])
         dydt = x[:, 0] * (self.rho - x[:, 2]) - x[:, 1]
         dzdt = x[:, 0] * x[:, 1] - self.beta * x[:, 2]
         
-        return torch.stack([dxdt, dydt, dzdt], dim=0)
+        return torch.stack([dxdt, dydt, dzdt], dim=1)
     
     def na_f(self, t, x):
+        t, x = self.f_tests(t, x, driven=True)
         dxdt = self.sigma * (x[:, 1] - x[:, 0])
         dydt = x[:, 0] * (x[:, 3] - x[:, 2]) - x[:, 1]
         dzdt = x[:, 0] * x[:, 1] - self.beta * x[:, 2]
-        drdt = self.na_rate*torch.ones_like(dxdt)
-        print(drdt.shape, dxdt.shape)
+        drdt = self.drive_rate*torch.ones_like(dxdt)
+        #print(drdt.shape, dxdt.shape)
 
-        return torch.stack([dxdt, dydt, dzdt, drdt])
+        return torch.stack([dxdt, dydt, dzdt, drdt], dim=1)
 
     
 class Rössler(DynamicalSystem_torch):
     def __init__(self, a=0.2, b=0.2, c=5.7):
-        super().__init__()
+        super().__init__(dim=3)
         self.a = a
         self.b = b
         self.c = c
 
     def f(self, t, x):
+        t, x = self.f_tests(t, x)
         dxdt = -x[:, 1] - x[:, 2]
         dydt = x[:, 0] + self.a * x[:, 1]
         dzdt = self.b + x[:, 2] * (x[:, 0] - self.c)
-        return torch.stack([dxdt, dydt, dzdt], dim=0)
+        return torch.stack([dxdt, dydt, dzdt], dim=1)
     
 class Hopf(DynamicalSystem_torch):
     def __init__(self, rho=1.0, alpha=1.0, omega = 1.0, beta=1.0):
-        super().__init__()
+        super().__init__(dim=2)
         self.rho = rho 
         self.alpha = alpha
         self.beta = beta
         self.omega = omega
         self.gamma = 0.1 #Rate of change of bifurcation parameter
-        self.system_dim = 2
+        
 
 
     def f(self, t, x): 
         #x sould be (traj, dim)
-        if not isinstance(x, torch.Tensor):
-            raise TypeError(f"Expected torch.Tensor, got {type(x)}")
-        elif len(x.shape) == 1:
-            if x.shape[0] != self.system_dim: 
-                raise ValueError("x must have dimension of 2")
-            else:
-                x = x.unsqueeze(0)
-        elif len(x.shape) == 2: 
-            if x.shape[1] != self.system_dim: 
-                raise ValueError("x.shape[1] must have dimension of ", self.system_dim)
-        else:
-            raise ValueError("Input tensor x cannot have more than 2 dimensions (trajectory, dimension)")
+        t, x = self.f_tests(t, x)
         
         xdot = self.rho * x[:, 0] - self.omega * x[:, 1] + (self.alpha*x[:, 0] - self.beta * x[:, 1])*(x[:, 0]**2 + x[:, 1]**2) #traj
         ydot = self.omega * x[:, 0] + self.rho * x[:, 1] + (self.beta*x[:, 0] + self.alpha * x[:, 1])*(x[:, 0]**2 + x[:, 1]**2) #(traj)
-        return torch.cat([xdot.unsqueeze(1), ydot.unsqueeze(1)], dim = 1)
+        return torch.stack([xdot, ydot], dim = 1)
     
     def na_f(self, t, x):
+        t, x = self.f_tests(t, x, driven=True)
         xdot = x[:, 2] * x[:, 0] - self.omega * x[:, 1] + (self.alpha*x[:, 0] - self.beta * x[:, 1])*(x[:, 0]**2 + x[:, 1]**2) #traj
         ydot = self.omega * x[:, 0] + x[:, 2] * x[:, 1] + (self.beta*x[:, 0] + self.alpha * x[:, 1])*(x[:, 0]**2 + x[:, 1]**2) #(traj)
         rdot = self.gamma*torch.ones_like(x[:, 0]) #Rate of change of bifurcation parameter
-        return torch.cat([xdot.unsqueeze(1), ydot.unsqueeze(1), rdot.unsqueeze(1)], dim = 1)
+        return torch.stack([xdot, ydot, rdot], dim = 1)
 
 
 
