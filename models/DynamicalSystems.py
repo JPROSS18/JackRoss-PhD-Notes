@@ -83,12 +83,24 @@ class Lorenz(DynamicalSystem_torch):
         self.beta = beta
         self.rho = rho
 
+        self.na_rate = 0
+
     def f(self, t, x):
-        dxdt = self.sigma * (x[1] - x[0])
-        dydt = x[0] * (self.rho - x[2]) - x[1]
-        dzdt = x[0] * x[1] - self.beta * x[2]
+        dxdt = self.sigma * (x[:, 1] - x[:, 0])
+        dydt = x[:, 0] * (self.rho - x[:, 2]) - x[:, 1]
+        dzdt = x[:, 0] * x[:, 1] - self.beta * x[:, 2]
         
         return torch.stack([dxdt, dydt, dzdt], dim=0)
+    
+    def na_f(self, t, x):
+        dxdt = self.sigma * (x[:, 1] - x[:, 0])
+        dydt = x[:, 0] * (x[:, 3] - x[:, 2]) - x[:, 1]
+        dzdt = x[:, 0] * x[:, 1] - self.beta * x[:, 2]
+        drdt = self.na_rate*torch.ones_like(dxdt)
+        print(drdt.shape, dxdt.shape)
+
+        return torch.stack([dxdt, dydt, dzdt, drdt])
+
     
 class Rössler(DynamicalSystem_torch):
     def __init__(self, a=0.2, b=0.2, c=5.7):
@@ -98,9 +110,9 @@ class Rössler(DynamicalSystem_torch):
         self.c = c
 
     def f(self, t, x):
-        dxdt = -x[1] - x[2]
-        dydt = x[0] + self.a * x[1]
-        dzdt = self.b + x[2] * (x[0] - self.c)
+        dxdt = -x[:, 1] - x[:, 2]
+        dydt = x[:, 0] + self.a * x[:, 1]
+        dzdt = self.b + x[:, 2] * (x[:, 0] - self.c)
         return torch.stack([dxdt, dydt, dzdt], dim=0)
     
 class Hopf(DynamicalSystem_torch):
