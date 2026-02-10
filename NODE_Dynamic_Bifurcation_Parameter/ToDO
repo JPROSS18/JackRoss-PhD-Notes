@@ -1,17 +1,16 @@
 
 I want to learning a function of the form $\dot x = f(x(t), r(t))$. 
 
- Code to learn dynamic bifurcation (still in progress)
- Vary network size (did nothing)
 
- 1. Learing hopf bifurcation (static param) (done)
- 2. Learn limit cycle (linear dynamic param ) (done)
+Current Goal 
+ 1. Learn hopf bifurcation with dynamic parameter and extrapolate into static parameter 
+ 2. Does NODE replicate NODE lyapunov exponents 
+ 3. 
+
  
- 3. Learn hopf bifurcation (linear dynamic b-param)
- 4. Learn Lorenz (non chaotic) - static param 
- 5. Learn Lorenz (linear dynamic param)
+
 
 
 3. Optimise neural odes for speed
--adjoint vs not 
-- wrapper vs in forward. 
+-adjoint vs not - adjoint not 
+
