@@ -129,6 +129,10 @@ ANODE generalise much better and lower computation cost (as less complicated flo
 
 - ANODE outperforms NODE even when total number of parameters are equivalent. 
 
+Downside: 
+
+Will ANODE's perform worse when learning a vector field ? It should 
+
 ## Training 
 Training regimes can be divided into discretise-then-optimise and optimise-then-discretise. 
 ### Discretise-then-optimise:
@@ -209,6 +213,8 @@ More often referred to as the continuous adjoint method or optimise then discret
 
 
 
+
+### Pairwise Training 
 ## Existence and Uniqueness:
 
 ## Stability 
