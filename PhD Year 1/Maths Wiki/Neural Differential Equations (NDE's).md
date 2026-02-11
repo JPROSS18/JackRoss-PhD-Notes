@@ -221,6 +221,65 @@ More often referred to as the continuous adjoint method or optimise then discret
 
 For NODE's spectral norm conditions keep trajectories bounded: described in Kidger ?
 
+## Variations
+
+### Augmented Neural ODE's:
+
+There are constraints on the approximation properties of the Neural ODE's in their simplest form. 
+
+The latent space on which the ode evolves is augmented from $\mathbb{R}^d$ to $\mathbb{R}^{d + p}$. This will allow trajectories to avoid intersecting each other.  
+
+> [!quote] However, autonomous ODE flows may limit expressivity by constraining trajectories to remain diffeomorphic transformations of initial states, thus prohibiting intersecting paths in latent space. - This is interesting I need to read more about it 
+
+
+
+[[dupontAugmentedNeuralODEs2019| Dupont et al. (2019)]] introduced Augmented Neural ODE's to overcome limitations: 
+$$
+\frac{d}{dt}
+\begin{bmatrix}
+z(t) \\
+a(t)
+\end{bmatrix}
+= f\bigl(\begin{bmatrix}
+z(t) \\
+a(t)
+\end{bmatrix},
+
+\space t; \space\theta_f\bigr)
+ \quad 
+ \begin{bmatrix}
+z(0) \\ 
+a(0)
+\end{bmatrix}
+= 
+\begin{bmatrix}
+x \\
+0
+\end{bmatrix}
+$$
+
+Where $a(t)$ is an auxiliary variable. 
+
+This approach should make the learned $f$ smoother. Further details in review of paper. 
+
+ANODE generalise much better and lower computation cost (as less complicated flows are learned). 
+
+- ANODE outperforms NODE even when total number of parameters are equivalent. 
+
+Downside: 
+
+Will ANODE's perform worse when learning a vector field ? It should 
+
+
+### Neural ODE's for Chaotic Dynamics 
+Discussed in [[chakrabortyDivideConquerLearning2024 | Chakraborty et al (2024)]]. 
+
+Multi-step penalty neural ODE (MP-NODE) was propsed. 
+
+### Stabilised Neural ODE
+
+### Modulated NODE
+
 
 # Neural Controlled Differential Equations: 
 
