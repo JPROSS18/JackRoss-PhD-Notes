@@ -1,0 +1,32 @@
+{
+  "database": "Zotero",
+  "noteImportFolder": "Literature",
+  "pdfExportImageDPI": 120,
+  "pdfExportImageFormat": "jpg",
+  "pdfExportImageQuality": 90,
+  "citeFormats": [
+    {
+      "name": "Cite",
+      "format": "formatted-citation",
+      "cslStyle": "harvard-imperial-college-london"
+    },
+    {
+      "name": "BibLaTeX",
+      "format": "biblatex",
+      "command": "autocite"
+    }
+  ],
+  "exportFormats": [
+    {
+      "name": "Library",
+      "outputPathTemplate": "Literature/{{citekey}}.md",
+      "imageOutputPathTemplate": "{{title}}/",
+      "imageBaseNameTemplate": "image",
+      "templatePath": "Templates/Template.md"
+    }
+  ],
+  "citeSuggestTemplate": "[[{{citekey}}]]",
+  "openNoteAfterImport": true,
+  "whichNotesToOpenAfterImport": "all-imported-notes",
+  "shouldConcat": true
+}

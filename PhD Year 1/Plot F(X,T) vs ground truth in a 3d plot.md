@@ -1,0 +1,1 @@
+Plot F(X,T) vs ground truth in a 3d plot

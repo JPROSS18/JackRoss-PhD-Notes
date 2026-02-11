@@ -1,0 +1,26 @@
+{
+  "calendarSources": [
+    {
+      "type": "ical",
+      "color": "#4dac9d",
+      "url": "https://calendar.google.com/calendar/ical/j.ross25%40imperial.ac.uk/private-17fd918b99a68d1a49e0a2ec79d65399/basic.ics"
+    },
+    {
+      "type": "ical",
+      "color": "#d41111",
+      "url": "https://outlook.office365.com/owa/calendar/91fe856d73ec4799a05e2b3f37ae15aa@imperial.ac.uk/358c9069da9a4435b18136501d0a337616449219880452052715/calendar.ics"
+    },
+    {
+      "type": "ical",
+      "color": "#578eb7",
+      "url": "https://calendar.google.com/calendar/ical/bfebdooh264ev63oe3m5n86t4g%40group.calendar.google.com/public/basic.ics"
+    }
+  ],
+  "defaultCalendar": 0,
+  "firstDay": 1,
+  "initialView": {
+    "desktop": "timeGridWeek",
+    "mobile": "timeGridDay"
+  },
+  "timeFormat24h": false
+}
