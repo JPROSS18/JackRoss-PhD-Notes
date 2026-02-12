@@ -85,8 +85,13 @@ class DynamicalSystem_torch(DynamicalSystem):
 
         return torch.tensor(self.f(t, x.numpy()), dtype=torch.float32)
     
+    def na_f(self, t, x):
+        t, x = self.f_tests(t, x, driven=True)
+
+        return torch.tensor(self.f(t, x.numpy()), dtype=torch.float32)
     
-    def solve(self, x0, t_span, dt):
+    
+    def solve(self, x0, t_span, dt, driven=False):
         '''
         Solves the system using torchdiffeq's odeint. Modified to allow for multiple initial conditions.
 
@@ -99,11 +104,15 @@ class DynamicalSystem_torch(DynamicalSystem):
             The time step for the solution
         t_span : tuple
             The time span for the solution (t0, t_end)
-     
         --------------
         '''
+        if driven: 
+            func = self.na_f
+        else:
+            func = self.f      
+
         t = torch.arange(t_span[0], t_span[1], dt)
-        sol = odeint(func=self.f, y0=x0, t=t, method='rk4', options={'step_size': dt})  # shape (num_timepoints, system dimension, num_trajectories)
+        sol = odeint(func=func, y0=x0, t=t, method='rk4', options={'step_size': dt})  # shape (num_timepoints, system dimension, num_trajectories)
         return sol
 
 

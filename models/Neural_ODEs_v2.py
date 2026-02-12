@@ -199,6 +199,35 @@ class Trainer:
 
             avg_epoch_loss = epoch_loss / len(self.data_loader)
             self.loss_list.append(avg_epoch_loss)
+
+    def plot_loss(self):
+        ### Analysis  
+        epochs = len(self.loss_list)
+        fig = plt.figure(figsize=(15,6))
+        ax = fig.add_subplot(1, 2, 1)
+
+        ax.plot(np.linspace(0, epochs, len(self.loss_list)), self.loss_list)
+        ax.grid()
+
+        ax.set_xlabel('Epochs', fontsize=15)
+        ax.set_ylabel('Loss', fontsize=15)
+        ax.set_xlim(0, epochs)
+        ax.set_ylim(bottom=0)
+
+        ax2 = fig.add_subplot(1, 2, 2)
+
+        e_pts = np.linspace(0, epochs, len(self.loss_list))
+        ax2.plot(e_pts[1:], self.loss_list[1:])
+
+        #ax2.set_ylim()
+        ax2.grid()
+        #plt.xscale('log')~
+        #
+        ax2.set_yscale('log')
+        #ax2.set_xscale('log')
+        ax2.set_xlabel('Epochs', fontsize=15)
+    
+
     
 
 
