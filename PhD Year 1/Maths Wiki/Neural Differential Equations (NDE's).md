@@ -86,6 +86,12 @@ ODE becomes more computationally expensive to solve after longer computations.
 
 
 Weight decay Grathwohl et al ?
+
+#### Standard Loss Insufficient for Learning Dynamics 
+
+While standard L1/L2 losses do indicate some level of learning. They do not indicate if the underlying dynamics have been learned rather than some interpolating function which would be incapable of extrapolting to unseen regions of the state space. 
+
+This issue is explored here: [[Learning Dynamics]]
 ## Augmented Neural ODE's:
 
 There are constraints on the approximation properties of the Neural ODE's in their simplest form. 
