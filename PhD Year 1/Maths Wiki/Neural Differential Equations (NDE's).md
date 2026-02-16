@@ -3,8 +3,7 @@ Neural Differential Equations
 >[!quote] Neural differential equations (NDEs) demonstrate that neural networks and differential equation are two sides of the same coin — (Kidger, 2022)  
 
 
-A neural differential equation is a differential equation which uses a neural network to parameterise the vector field. The simplest example if a **Neural Ordinary Differential Equation**, introduced in [[chenNeuralOrdinaryDifferential2018 |  (Chen et al., 2018) ]]
-
+A neural differential equation is a differential equation which uses a neural network to parameterise the vector field. The simplest example if a **Neural Ordinary Differential Equation**, introduced in  [[chenNeuralOrdinaryDifferential2018| @chen_neural_2018]]
 
 
 A Neural ODE can be described by: 

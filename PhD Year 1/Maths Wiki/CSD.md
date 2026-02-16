@@ -2,3 +2,5 @@ Time to return to a stable state after a perturbation increases as a bifurcation
 
 Early warning indicator of a bifurcation. 
 
+
+
