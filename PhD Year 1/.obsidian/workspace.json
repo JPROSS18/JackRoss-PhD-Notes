@@ -4,21 +4,65 @@
     "type": "split",
     "children": [
       {
-        "id": "aafd268ba982bbb6",
+        "id": "c9c4371eb1d3b01f",
         "type": "tabs",
         "children": [
           {
-            "id": "b22c7dab8fd7dd64",
+            "id": "add4bc34fd473b0f",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Learning Dynamics.md",
+                "file": "Maths Wiki/Non-Autonomous Dynamical Systems.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Learning Dynamics"
+              "title": "Non-Autonomous Dynamical Systems"
+            }
+          },
+          {
+            "id": "1846146d4490acb8",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "af2e055c765f7cdb",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "945e6c54ff007029",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Pre-compact.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Pre-compact"
+            }
+          },
+          {
+            "id": "a8668e49975cacf3",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
             }
           }
         ]
@@ -92,7 +136,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "a9c0fde44613be65",
@@ -195,12 +240,15 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "b22c7dab8fd7dd64",
+  "active": "add4bc34fd473b0f",
   "lastOpenFiles": [
-    "Chakraborty et al.md",
-    "Learning Dynamics.md",
-    "Maths Wiki/Neural Differential Equations (NDE's).md",
     "Maths Wiki/Non-Autonomous Dynamical Systems.md",
+    "Pre-compact.md",
+    "Reading List.md",
+    "Maths Wiki/Neural Differential Equations (NDE's).md",
+    "Measure Theory For Dynamics.md",
+    "Learning Dynamics.md",
+    "Chakraborty et al.md",
     "Conference.md",
     "Literature/chakrabortyDivideConquerLearning2024.md",
     "Julia in Python.md",
@@ -211,7 +259,6 @@
     "Maths Wiki/Multistability.md",
     "Maths Wiki/Koopman Operator.md",
     "Maths Wiki/Bifurcation.md",
-    "Reading List.md",
     "Literature/dupontAugmentedNeuralODEs2019.md",
     "Literature/chenNeuralOrdinaryDifferential2018.md",
     "Dupont et al. (2019).md",
@@ -225,8 +272,6 @@
     "Literature/ohComprehensiveReviewNeural2025.md",
     "Maths Wiki/Backpropagation.md",
     "Untitled.canvas",
-    "2026-01-28.md",
-    "Maths Wiki/Twin Surrogates.md",
     "Weekly Plan/2025",
     "Untitled.base",
     "templates_pdf/Pasted image 20251027120006.png",

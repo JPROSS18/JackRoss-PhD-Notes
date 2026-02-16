@@ -139,6 +139,21 @@ Downside:
 
 Will ANODE's perform worse when learning a vector field ? It should 
 
+## Modulated Neural ODE's 
+
+Introduced in [[Auzina et al (2023)]]. 
+
+Traditional Neural ODE's learn a single vector field (autonomous or non-autonoumous). This assumes all variation can be attributed to the initial conditions $(x_0, t_0)$. However, this may not always be the case in practice. 
+
+Modulated Neural ODE learns multiple (related) vector fields depending on learnt static and dynamic modulators. 
+$$
+\frac{dz}{dt}(t) = f_{\theta}(z(t) | d)
+$$
+where $d$ is a learnt time-invariant parameter depending on trajectory. 
+
+The proposed model is a latent neural ODE with $x_i = p_\xi (z_i | s)$. Where is $s$ is a learnt, trajectory dependent, static modulator. 
+
+It 
 ## Training 
 Training regimes can be divided into discretise-then-optimise and optimise-then-discretise. 
 ### Discretise-then-optimise:
