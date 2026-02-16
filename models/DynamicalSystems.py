@@ -17,6 +17,7 @@ class DynamicalSystem:
         #Constant function, to be overridden by subclasses
         return 0
 
+
     def solve(self, x0, t_span, dt):
         '''
         Solves the system using scipy's solve_ivp by RK45. Modified to allow for multiple initial conditions.
@@ -90,6 +91,24 @@ class DynamicalSystem_torch(DynamicalSystem):
 
         return torch.tensor(self.f(t, x.numpy()), dtype=torch.float32)
     
+        
+    def jacobian(self, t, x):
+        '''
+        Computes the Jacobian of the system at a given time t and state x using PyTorch's autograd functionality.
+        '''
+        func = lambda x, t=t: self.f(t, x)
+        return torch.autograd.functional.jacobian(func=func, inputs=x)
+    
+
+    # Numpy wrapper for f and jacobian. 
+    def f_numpy(self, t, x):
+        x = torch.tensor(x, dtype=torch.float32)
+        t, x = self.f_tests(t, x)
+        return self.f(t, x).squeeze(0).detach().numpy()
+    
+    def jacobian_numpy(self, t, x):
+        x = torch.tensor(x, dtype=torch.float32)
+        return self.jacobian(t, x).squeeze(0).detach().numpy()
     
     def solve(self, x0, t_span, dt, driven=False):
         '''
@@ -186,7 +205,28 @@ class Hopf(DynamicalSystem_torch):
         rdot = self.gamma*torch.ones_like(x[:, 0]) #Rate of change of bifurcation parameter
         return torch.stack([xdot, ydot, rdot], dim = 1)
 
+class saddlenode(DynamicalSystem_torch):
+    def __init__(self, a=-1.0, r = 0.0):
+        super().__init__(dim=1)
+        self.a = a
+        self.r = r
+        self.dadt = 0.0
+        self.drdt = 0.0
 
+    def f(self, t, x):
+        t, x = self.f_tests(t, x)
+        return self.a + (x[:, 0] - self.r)**2
+    
+    def na_f(self, t, x, bif=True):
+        self.f_tests(t, x, driven=True)
+        if bif:
+            dxdt = x[:, 1] + (x[:, 0] - self.r)**2
+            dadt = self.dadt*torch.ones_like(dxdt)
+            return torch.stack((dxdt, dadt), dim=1)
+        else: 
+            dxdt = self.a + (x[:, 0] - x[:, 1])**2
+            drdt = self.drdt*torch.ones_like(dxdt)
+            return torch.stack((dxdt, drdt), dim=1)
 
 
 #Functions for coordinate transformations
