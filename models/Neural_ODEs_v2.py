@@ -15,6 +15,10 @@ import torch.nn as nn
 from tqdm import tqdm
 from ipywidgets import interact, IntSlider
 
+import lyapynov as lya
+import models.DynamicalSystems as ds
+import multiprocessing as mp
+
 
 class Simple_FeedforwardNN(nn.Module):
     '''
@@ -157,7 +161,19 @@ class driven_neural_ODE(neural_ODE):
         drdt_tensor = torch.ones(out.shape[0], self.num_drivers)*self.drdt # shape (num_traj, drivers)
         final_out = torch.cat((out, drdt_tensor), dim=1) 
         return final_out
-    
+
+
+
+
+
+class Neural_DynamicalSystem(ds.DynamicalSystem_torch):
+    def __init__(self, model):
+        super().__init__(dim=model.input_dim)
+        self.model = model 
+
+    def f(self, t, x):
+        t, x = self.f_tests(t, x)
+        return self.model(t, x)
     
 class Trainer:
     def __init__(self, model, data_loader, optimizer, loss_fn, t_eval, dt):
@@ -231,67 +247,6 @@ class Trainer:
     
 
 
-class NODE_Bifurcation(Simple_FeedforwardNN):
-    '''
-    Class that creates an autonomous Neural ODE with a fixed bifurcation parameter. 
-
-    The bifurcation parameter must be set using the set_bif_param method.
-    '''
-    def __init__(self, spatial_dim: int, drivers: int, depth: int, width: int, activation_func: nn.Module = nn.Tanh()):
-        super().__init__(spatial_dim+drivers, depth, width, spatial_dim, activation_func)
-        self.width              = width #width is number of neurons per hidden layer
-        self.depth              = depth #Number of internal hidden layers
-        self.variables          = spatial_dim
-        self.drivers           =  drivers
-        self.bif_param          =  None
-
-    def set_bif_params(self, param: torch.Tensor):
-        '''
-        Method to set the bifurcation parameter.
-
-        Parameter must be a float or a torch pytorch tensor with shape: [1]
-        '''
-        if not torch.is_tensor(param):
-            raise TypeError("Input param must be a torch pytorch tensor")
-        else:
-            self.bif_param = param.float()
-
-        
-
-
-    def forward(self, t, x): #x shoudl be (num_traj, spatial_dim)
-        '''Takes t and x as input, where x is a pytorch tensor with shape: [trajectories, dim].'''
-        
-        if self.bif_param is None:
-            raise ValueError("Bifurcation parameter not set. Please use the set_bif_param method to set it before calling forward.")
-        
-        elif not torch.is_tensor(x):
-            raise TypeError("Input x must be a torch pytorch tensor with shape: [trajectories, dim]")
-
-        else:
-            r_val = self.bif_param
-            input = torch.cat((x, r_val), dim=1)
-            out = self.network(input) #(num_traj, spatial_dim+drivers)
-            return out
-        
-class normalize_data:
-    ''' 
-    Class to normalize and denormalize data. 
-
-    Data input shape default is (time, dim).
-    '''
-    
-    def __init__(self, data, axis=0):
-        self.data_mean = np.mean(data, axis=axis, keepdims=True)
-        self.data_std = np.std(data, axis=axis, keepdims=True)
-
-    def normalize(self, data):
-        normalized_data = (data - self.data_mean) / self.data_std
-        return normalized_data
-
-    def denormalize(self, normalized_data):
-        data = normalized_data * self.data_std + self.data_mean
-        return data
 
 #### Batching 
 # Want output ot be (time, traj, dim)

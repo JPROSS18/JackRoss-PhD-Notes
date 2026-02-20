@@ -107,4 +107,10 @@ Independent concepts.
 If trajectory start sufficiently close -> it will stay close
 If a trajectory starts sufficiently  close -> it will approach the set. 
 
-How can something be attractive but not stable??? 
+How can something be attractive but not stable??? Return to 
+
+**Lyapunov Functions:**
+The Lyapunov stability of invariant sets can be characterised by Lyapunov functions. 
+
+Suppose $M$ is a nonempty compact invariant set for a semi-dynamical system $\phi$ on a complete metric space $(X, d)$. Suppose also that there exists a continuous mapping $V: X \to \mathbb{R_0^{+}}$ with the properties 
+1. $\exists$ 
