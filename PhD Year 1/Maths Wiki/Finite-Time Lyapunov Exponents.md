@@ -1,8 +1,15 @@
 
 # Relevant Papers
 
+[[Lyapunov Exponents]]
+
 (Storm et al., 2024)
 Attempts to use finite-time Lyapunov exponents to understand exponential features in deep neural networks. 
+
+[@hoyer-leitzel_detecting_2018] 
+Claims to use FTLE and Steklov Averages as an early warning signal for Rate Induced tipping. 
+
+
 
 # Definition
 Maximal Lyapunov Exponent is defined as: 

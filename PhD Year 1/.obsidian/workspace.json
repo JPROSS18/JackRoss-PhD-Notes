@@ -55,16 +55,44 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Marking Notes.md",
+                "file": "Lyapunov Exponents.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Marking Notes"
+              "title": "Lyapunov Exponents"
+            }
+          },
+          {
+            "id": "99200df82a647599",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Structural Stability.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Structural Stability"
+            }
+          },
+          {
+            "id": "ff1f78029bf395db",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Courses/Random Dynamical Systems/Ergodic Theory.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Ergodic Theory"
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -135,8 +163,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "right": {
     "id": "a9c0fde44613be65",
@@ -239,9 +266,17 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "5ca87953063d6e03",
+  "active": "ff1f78029bf395db",
   "lastOpenFiles": [
+    "Courses/Random Dynamical Systems/Introduction.md",
+    "Courses/Random Dynamical Systems/Ergodic Theory.md",
+    "Lyapunov Exponents.md",
+    "Random Dynamical Systems.md",
+    "Courses/Random Dynamical Systems",
+    "Structural Stability.md",
+    "Reading List.md",
     "Invariant Measures for Machine Learning.md",
+    "Maths Wiki/Finite-Time Lyapunov Exponents.md",
     "Marking Notes.md",
     "Maths Wiki/Non-Autonomous Dynamical Systems.md",
     "Maths Wiki/CSD.md",
@@ -261,16 +296,9 @@
     "Maths Wiki/Neural Differential Equations (NDE's).md",
     "Literature/chenNeuralOrdinaryDifferential2018.md",
     "Literature/tegelenNeuralOrdinaryDifferential2025.md",
-    "Overall Ideas to Investigate..md",
     "Untitled 6.canvas",
-    "Weekly Plan/2025/Week 8.md",
     "Untitled 4.canvas",
     "Untitled 5.canvas",
-    "Maths Wiki/Pre-compact.md",
-    "Research Plan.md",
-    "Reading List.md",
-    "Learning Dynamics.md",
-    "Chakraborty et al.md",
     "Untitled 3.canvas",
     "Untitled 2.canvas",
     "Untitled 1.canvas",
@@ -289,7 +317,6 @@
     "Courses/Transitions Over Saddles/New note.pdf",
     "Pasted image 20251021181215.png",
     "templates_pdf/blank.pdf",
-    "templates_pdf",
     "Pasted image 20251023175007.png"
   ]
 }

@@ -3,11 +3,23 @@ I want to learning a function of the form $\dot x = f(x(t), r(t))$.
 
 
 Current Goal 
- 1. Learn hopf bifurcation with dynamic parameter and extrapolate into static parameter 
- 2. Does NODE replicate NODE lyapunov exponents 
- 3. 
+ 1. Learn with more complex (non-linear) bifurcation parameter. 
+ 2. Can we fit a function on moving average of lyapunov exponents to predict bifurcation point.
+ 3. Improve computatin of lyapunov exponents
+
+ Goal 1: 
+ 1. How could we learn rho(t)
+ 2. More non-linear rho(t)
+
+
+ Goal 2: 
+ 1. Does direction of delay change when all intervals have same amount of data. 
+ 2. Starting at (t_0, x_0) rather than transient from (0, t_0). 
 
  
+Goal 3:
+1. Using torch autograd to compute lyapunov exponents. 
+
 
 
 
