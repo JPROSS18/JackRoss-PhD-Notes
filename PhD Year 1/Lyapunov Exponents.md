@@ -45,3 +45,17 @@ first proposed by
 numbers for dynamical systems,” Trans. Moscow Math. Soc. 19, 197–231 (1968).**
 
 https://link.springer.com/article/10.1007/s11071-018-4544-z
+
+**Naive Approach to Computation:**
+We can solve the coupled system on the time interval $[0, T]$
+$$
+\begin{aligned}
+\dot x = f(x) \\
+\dot Y = J(x)Y 
+\end{aligned}
+$$where $J(x)$ is $\frac{\partial }{\partial x}f$, the Jacobian matrix of $f$.  
+
+The take $QR$ decomposition of $Y(T) = Q(T)R(T)$. Then $\frac{1}{T} \ln (R_{ii}) \approx \lambda_i$
+However, over time $Y(t)$ will cease to be orthonormal and all basis vectors will converge to largest direction of greatest expansion. 
+
+

@@ -1,0 +1,19 @@
+
+using IJulia
+
+
+println("------- Starting File -------")
+
+x = 3
+y = 4
+z = x^2 + y^2
+println("The value of z is: ", z)
+
+
+# Check what Torch.jl actually provides
+using Torch
+
+println("Available names in Torch module:")
+println(names(Torch))
+
+println("\n------- End of File -------")

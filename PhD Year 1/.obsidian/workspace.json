@@ -92,7 +92,7 @@
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -138,7 +138,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "lyapunov",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -159,7 +159,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "horizontal",
@@ -266,18 +267,27 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "ff1f78029bf395db",
+  "active": "5ca87953063d6e03",
   "lastOpenFiles": [
-    "Courses/Random Dynamical Systems/Introduction.md",
+    "Maths Wiki/Ensemble Averaged Pairwise Distance (EAPD).md",
     "Courses/Random Dynamical Systems/Ergodic Theory.md",
+    "Marking Notes.md",
+    "Differential Equations Classes.md",
     "Lyapunov Exponents.md",
+    "Users/jackr/Library/CloudStorage/OneDrive-ImperialCollegeLondon/MATH50004_PS5_2026.pdf.md",
+    "().md",
+    "Users/jackr/Library/CloudStorage/OneDrive-ImperialCollegeLondon",
+    "Users/jackr/Library/CloudStorage",
+    "Users/jackr/Library",
+    "Users/jackr",
+    "Users",
+    "Courses/Random Dynamical Systems/Introduction.md",
     "Random Dynamical Systems.md",
     "Courses/Random Dynamical Systems",
     "Structural Stability.md",
     "Reading List.md",
     "Invariant Measures for Machine Learning.md",
     "Maths Wiki/Finite-Time Lyapunov Exponents.md",
-    "Marking Notes.md",
     "Maths Wiki/Non-Autonomous Dynamical Systems.md",
     "Maths Wiki/CSD.md",
     "Literature/@tegelen_neural_2025.md",
@@ -292,10 +302,6 @@
     "10.48550",
     "@tadokoro_trans-bifurcation_2024.md",
     "Literature/Using Machine Learning To Anticipate Tipping Points and To Extrapolate To Post-Tipping Point Dynamics of Non-Stationary Dynamical Systems.md",
-    "Maths Wiki/Universal Differential Equations (UDEs).md",
-    "Maths Wiki/Neural Differential Equations (NDE's).md",
-    "Literature/chenNeuralOrdinaryDifferential2018.md",
-    "Literature/tegelenNeuralOrdinaryDifferential2025.md",
     "Untitled 6.canvas",
     "Untitled 4.canvas",
     "Untitled 5.canvas",
@@ -311,12 +317,7 @@
     "templates_pdf/Pasted image 20251027124318.png",
     "templates_pdf/Pasted image 20251027131219.png",
     "Excalidraw",
-    "Misc",
-    "Courses",
-    "Maths Wiki",
-    "Courses/Transitions Over Saddles/New note.pdf",
     "Pasted image 20251021181215.png",
-    "templates_pdf/blank.pdf",
     "Pasted image 20251023175007.png"
   ]
 }

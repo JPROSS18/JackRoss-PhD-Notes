@@ -27,4 +27,17 @@ where $M_1(X)$ is the space of probability measures on $X$.
 Measure how much 'volume/mass' is pushed forward onto $A$ by the dynamical system w.r.t to a specific measure $\mu$. 
 An invariant measure is a fixed point of the map $f_{*}$. 
 
+$$
+f_*(\mu) = \mu
+$$
+
 Moves onto consider properties of the push-forward measure w.r.t the Dirac measure. 
+**Examples:**
+
+Consider the DIrac measure $\delta_{x_0}(x)$. It can be easily deduced that:
+
+$$
+f_* \delta_{x_0} = \delta_{f(x)}
+$$
+It can then be seen that the $\delta_x$ is an invariant measure on fixed points ($f(x_0) = x_0$).
+

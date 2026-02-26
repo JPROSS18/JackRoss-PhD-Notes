@@ -260,7 +260,61 @@ class DynamicalSystems_analysis:
 
     '''
     def __init__(self, model: DynamicalSystem_torch):
-        self.model = model 
+        self.model = model
+
+    def lyapunov_spectrum_f(self, t, x):
+        # Input Tensor x has shape [num trajectors, D system Dimenions, K+1 number of pertubation vectors and i.c for system] 
+        x_vals = x[:, :, -1] #system state is the last column of input, shape (num trajectories, system dimension)
+        Y_vals = x[:, :, 0:-1] #pertubation vectors are the first K columns of input, shape (num trajectories, system dimension, K)
+        dxdt = self.model.f(t, x_vals).unsqueeze(2) # shape (num trajectories, system dimension, 1)
+
+        jac_func = torch.func.vmap(torch.func.jacrev(lambda x: self.model.f(t, x)))
+        J = jac_func(x_vals)[:, 0, :, :] # shape (num trajectories, system dimension, system dimension)
+        dYdt = J @ Y_vals # shape (num trajectories, system dimension, system dimension) @ (num trajectories, system dimension, K) -> (num trajectories, system dimension, K)
+    
+        return torch.cat([dYdt, dxdt], dim=2)
+        
+
+
+    def lyapunov_spectrum(self, x0 = torch.ones(1, 3, 1),  k=1, t0 = 0, dt = 0.01, t_transient_pts = 100, num_pts_compute = 1_000, non_autonomous = False):
+        #Step size for integration
+        t_step = torch.arange(t0, t0 + 2*dt, dt)
+        t_pts_transient = t_transient_pts
+
+        if non_autonomous:
+            system_dim = self.model.system_dim + 1
+        else: 
+            system_dim = self.model.system_dim
+
+        # Number of trajectories to run in parallel
+        #traj = 0
+
+        #Initial System State 
+        x = x0
+        pertubation_vectors = torch.eye(system_dim)[:, 0:k].repeat(x.shape[0], 1, 1)
+
+
+
+        # Initial input for the coupled system, which includes the initial condition for the system and the initial perturbation vectors (which are just the identity matrix)
+        input = torch.cat([pertubation_vectors, x], dim=2) # Shape ( num_trajectories, system_dim, k+1 + 1)
+        input_new = input
+
+        r_vals = []
+        for i in tqdm(range(num_pts_compute), desc = "Computing Lyapunov Spectrum"):
+            output = odeint(func=self.lyapunov_spectrum_f, y0=input_new, t=(t_step + (dt*i)))
+            Y_step = output[-1, :, :, 0:-1]
+            x_step = output[-1, :, :, -1] # shape (num trajectories, system dimension)
+
+            QR_matrix = torch.linalg.qr(Y_step)
+            
+            r_vals.append(torch.diagonal(QR_matrix.R, dim1=1, dim2=2))
+            Y_new = QR_matrix.Q # shape (num trajectories, system dimension, K)
+            input_new = torch.cat([Y_new, x_step.unsqueeze(2)], dim=2) # shape (num trajectories, system dimension, K+1)
+           
+
+        r_tensor = torch.stack([*r_vals[t_pts_transient:]]) # shape (num_pts_compute - t_pts_transient, num trajectories, K)
+        lyapunov_spectrum_out = torch.mean(torch.log(torch.abs(r_tensor)), dim=0)*(1/t_step[-1])
+        return lyapunov_spectrum_out
 
     def lyapunov_exponents(self, x0, dt, t_span: tuple, t0=0, num_exponents=1, keep_data=False):
         '''
