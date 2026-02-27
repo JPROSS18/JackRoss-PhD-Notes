@@ -239,6 +239,7 @@ class saddlenode(DynamicalSystem_torch):
     
     def na_f(self, t, x, bif=True):
         self.f_tests(t, x, driven=True)
+        print("x shape in na_f: ", x.shape) # Expecting (num_trajectories, system dimension + 1)
         if bif:
             dxdt = x[:, 1] + (x[:, 0] - self.r)**2
             dadt = self.dadt*torch.ones_like(dxdt)
@@ -264,7 +265,8 @@ class DynamicalSystems_analysis:
 
     def lyapunov_spectrum_f(self, t, x):
         # Input Tensor x has shape [num trajectors, D system Dimenions, K+1 number of pertubation vectors and i.c for system] 
-        x_vals = x[:, :, -1] #system state is the last column of input, shape (num trajectories, system dimension)
+        x_vals = x[:, :, -1] #system state is the last column of input, shape (num trajectories, system dimension
+    
         Y_vals = x[:, :, 0:-1] #pertubation vectors are the first K columns of input, shape (num trajectories, system dimension, K)
         dxdt = self.model.f(t, x_vals).unsqueeze(2) # shape (num trajectories, system dimension, 1)
 
@@ -301,6 +303,7 @@ class DynamicalSystems_analysis:
 
         r_vals = []
         for i in tqdm(range(num_pts_compute), desc = "Computing Lyapunov Spectrum"):
+       
             output = odeint(func=self.lyapunov_spectrum_f, y0=input_new, t=(t_step + (dt*i)), method='rk4', options={'step_size': dt})
             Y_step = output[-1, :, :, 0:-1]
             x_step = output[-1, :, :, -1] # shape (num trajectories, system dimension)
