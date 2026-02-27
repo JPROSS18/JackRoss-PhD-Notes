@@ -131,7 +131,7 @@ class DynamicalSystem_torch(DynamicalSystem):
         else:
             func = self.f      
 
-        t = torch.arange(t_span[0], t_span[1], dt)
+        t = torch.arange(t_span[0], t_span[1], dt, dtype=torch.float32)
         sol = odeint(func=func, y0=x0, t=t, method='rk4', options={'step_size': dt})  # shape (num_timepoints, system dimension, num_trajectories)
         return sol
     
@@ -276,9 +276,9 @@ class DynamicalSystems_analysis:
         
 
 
-    def lyapunov_spectrum(self, x0 = torch.ones(1, 3, 1),  k=1, t0 = 0, dt = 0.01, t_transient_pts = 100, num_pts_compute = 1_000, non_autonomous = False):
+    def lyapunov_spectrum(self, x0 = torch.ones(1, 3, 1, dtype=torch.float32),  k=1, t0 = 0, dt = 0.01, t_transient_pts = 100, num_pts_compute = 1_000, non_autonomous = False):
         #Step size for integration
-        t_step = torch.arange(t0, t0 + 2*dt, dt)
+        t_step = torch.arange(t0, t0 + 2*dt, dt, dtype=torch.float32)
         t_pts_transient = t_transient_pts
 
         if non_autonomous:
@@ -291,7 +291,7 @@ class DynamicalSystems_analysis:
 
         #Initial System State 
         x = x0
-        pertubation_vectors = torch.eye(system_dim)[:, 0:k].repeat(x.shape[0], 1, 1)
+        pertubation_vectors = torch.eye(system_dim, dtype=torch.float32)[:, 0:k].repeat(x.shape[0], 1, 1)
 
 
 
@@ -301,14 +301,18 @@ class DynamicalSystems_analysis:
 
         r_vals = []
         for i in tqdm(range(num_pts_compute), desc = "Computing Lyapunov Spectrum"):
-            output = odeint(func=self.lyapunov_spectrum_f, y0=input_new, t=(t_step + (dt*i)))
+            output = odeint(func=self.lyapunov_spectrum_f, y0=input_new, t=(t_step + (dt*i)), method='rk4', options={'step_size': dt})
             Y_step = output[-1, :, :, 0:-1]
             x_step = output[-1, :, :, -1] # shape (num trajectories, system dimension)
 
-            QR_matrix = torch.linalg.qr(Y_step)
+            # Move to CPU for QR decomposition (not supported on MPS)
+            device = Y_step.device
+            Y_step_cpu = Y_step.cpu()
+            QR_matrix = torch.linalg.qr(Y_step_cpu)
             
-            r_vals.append(torch.diagonal(QR_matrix.R, dim1=1, dim2=2))
-            Y_new = QR_matrix.Q # shape (num trajectories, system dimension, K)
+            # Move results back to original device
+            r_vals.append(torch.diagonal(QR_matrix.R, dim1=1, dim2=2).to(device))
+            Y_new = QR_matrix.Q.to(device) # shape (num trajectories, system dimension, K)
             input_new = torch.cat([Y_new, x_step.unsqueeze(2)], dim=2) # shape (num trajectories, system dimension, K+1)
            
 

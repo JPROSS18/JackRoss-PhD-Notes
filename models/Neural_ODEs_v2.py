@@ -107,7 +107,7 @@ class NODE(Simple_FeedforwardNN):
         
         '''
         z = self.input_layer(x)
-        out = odeint(self.f, z, torch.arange(self.t_span[0], self.t_span[1], self.dt), method='rk4', options={'step_size': self.dt}) # out shape (time, num_traj, hidden_dim)
+        out = odeint(self.f, z, torch.arange(self.t_span[0], self.t_span[1], self.dt, dtype=torch.float32), method='rk4', options={'step_size': self.dt}) # out shape (time, num_traj, hidden_dim)
         out = self.output_layer(out) # out2 shape (time, num_traj, output_dim)
         return out 
     
@@ -158,7 +158,7 @@ class driven_neural_ODE(neural_ODE):
         Takes t and x as input, where x is a pytorch tensor with shape: [trajectories, dim+drivers].
         '''
         out = self.network(x) #(num_traj, spatial_dim+drivers) -> (num_traj, output_dim)
-        drdt_tensor = torch.ones(out.shape[0], self.num_drivers)*self.drdt # shape (num_traj, drivers)
+        drdt_tensor = torch.ones(out.shape[0], self.num_drivers, dtype=torch.float32)*self.drdt # shape (num_traj, drivers)
         final_out = torch.cat((out, drdt_tensor), dim=1) 
         return final_out
 
@@ -365,15 +365,15 @@ if __name__ == "__main__":
     
 
 
-    a = torch.tensor([0.5]).repeat(3).unsqueeze(0)
+    a = torch.tensor([0.5], dtype=torch.float32).repeat(3).unsqueeze(0)
     model = Piecewise_Auto_NODE(spatial_dim=3, depth=3, width = 30, time_range=[0,20], num_breakpoints=3, activation_func=nn.Tanh())
 
     #Saving loss and setting optimiser 
     loss_list = []
     optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
-    training_data_tensor = torch.ones(100, 2, 3)
+    training_data_tensor = torch.ones(100, 2, 3, dtype=torch.float32)
     dt = 0.01
-    t_eval_tensor = torch.arange(0, 1, dt)#
+    t_eval_tensor = torch.arange(0, 1, dt, dtype=torch.float32)#
     
 
     #Single training loop
