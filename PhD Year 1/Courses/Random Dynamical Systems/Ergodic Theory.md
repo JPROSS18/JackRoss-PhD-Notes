@@ -41,3 +41,33 @@ f_* \delta_{x_0} = \delta_{f(x)}
 $$
 It can then be seen that the $\delta_x$ is an invariant measure on fixed points ($f(x_0) = x_0$).
 
+
+Additional Examples in notes
+
+# Poincaré Recurrence Theorem
+
+**Theorem:**
+Let $(X, \mathcal{F}, \mu)$ be a probability space and consider a measurable mapping $f: X \to X$ such that $\mu$ is invariant w.r.t $f$. 
+
+Let $A \in \mathcal{F}$ and $\mu(A) > 0$. Then for $\mu$-almost all points $x \in A$, there exists an $n \in \mathbb{N}$ such that $f^{n}(x) \in A$. 
+
+Also, for $\mu$-almost all points $x \in A$, there are infinitely many $i \in \mathbb{N}$ for which $f^{i}(x) \in A$. 
+
+**Proof:**
+Discussed in notes. Manageable. 
+
+
+**Example:**
+Let $f_\alpha : \mathbb{S}^1 \to \mathbb{S}^1$   be a circle rotation, $f_\alpha(x) = xe^{2\pi i \alpha}$. It can be shown that the Lebesgue measure is invariant under $f_\alpha$.  
+
+When $\alpha$ is rational, every orbit is periodic with the same period. Poincaré's Recurrence theorem will give us no new information. 
+
+If $\alpha$ is irrational, let $A = B_\delta (x)$. $\mu(A) > 0$ for the Lebesgue  measure. Therefore, for all $x \in \mathbb{S}^1$ and $\forall \delta > 0$, $\exists n \in \mathbb{N}$ such that:
+$$
+|f^n_\alpha(x) - x| < \delta
+$$
+Therefore every orbit is dense in $\mathbb{S}^1$ when $\alpha$ is irrational. 
+
+Is this a chaotic but not strange attractor? Not really an attractor?
+
+# Theorem of Krylov-Bogolyubov 
