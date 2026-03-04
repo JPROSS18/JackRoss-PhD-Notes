@@ -16,16 +16,41 @@ In particular, we hope to focus on *non-autonomous dynamical systems*.
 1. Optimise current machine learning architectures for learning of non-autonomous systems. 
 2. Use existing dynamical systems theory in order to study the dynamics of reconstructed systems. 
 
+[@janosi_overview_2024] Finite Time Theory of Non-autonomous Dynamical Systems with a parameter drift. 
+
+[@louwLearningClimateDynamical2025] Rigorous approach to learning dynamical systems (from measure-theoretic perspective.)
+
+
+
+
 ## Critical Transitions 
 A particular focus should be paid to the study of critical transitions, a where a qualitive change in system dynamics occurs. 
 
 The study of critical transitions is central of to the mathematical study of many real world systems. 
 
-The study of critical transitions using purely data-driven approaches is diffucult as the systems changes between states where the dynamics can be highly different. 
+The study of critical transitions using purely data-driven approaches is difficult as the systems changes between states where the dynamics can be highly different. 
 
-Additionally, exisitng methods for the analysis of critical transitions -(early warning signals and related), are difficult int he non-autonomous case due to limited data. 
+Additionally, existing methods for the analysis of critical transitions -(early warning signals and related), are difficult int he non-autonomous case due to limited data. 
 
 We hope to investigate if machine learning approaches can reconstruct non-autonomous dynamical systems experiencing *dynamic bifurcations*, with possible extensions to *noise* and *rate-induced* critical transitions.  
+
+
+
+Related Literature: 
+[@wieczorek_rate-induced_2023] Rate Induced tipping 
+
+[@huangDeepLearningPredicting2024] Classifier trained on trajectories which experience rate induced tipping to predict if trajectory will experience tipping or not. 
+
+
+[@tegelenNeuralOrdinaryDifferential2025] Uses to neural ode to learn ode with known bifurcation parameter for prediction of bifurcation parameter. 
+
+[@patelMachineLearningPredicting2024] Uses reservoir computer driven by bifurcation parameter for prediction of critical transition. 
+
+[@panahiUnsupervisedLearningAnticipating2025] Uses Reservoir Computer + Autoencoder for fully data driven prediction. 
+
+[@tokuda_prediction_2024] Uses 2 Reservoir Computers for fully data driven predicting (slow vs fast).
+
+
 
 # Neural ODE's
 
@@ -42,6 +67,23 @@ However, neural ODE's are a more natural choice for learning dynamic critical tr
 1. Introduce optimal neural differential equations architectures for learning non-autonomous systems, in particular systems which undergo a critical transition. 
 2. Intro quantitive methods from based on dynamical systems theory which assess the reconstructed dynamics in the neural differential equation 
 
+Related Literature:
+[@chenNeuralOrdinaryDifferential2018] Introduced Neural ODE
+
+[@liuNeuralSDEStabilizing2019] Introduce Stochastic Neural ODE
+
+[@chakrabortyDivideConquerLearning2024] Neural ODE for chaotic dynamical systems. 
+
 ## Sleep-onset Period
 Additionally, we intend to explore the direct application of this work to the study of the sleep on-set period. This noisy non-autonomous system which models the transition from wake to sleep in humans. This data will be used to assess the effectiveness of the our methods. 
+
+Related Literature:
+
+[@yangWakesleepTransitionNoisy2016]  Original model which model the SOP as a noisy bifurcation. 
+
+[@liFallingAsleepFollows2025a] Deterministic Modelling of SOP cycle, use early warning signals to predict bifurcation point. 
+
+[@huLearningBistableCortical] Paper which fits noisy bifurcation model to individual sleep trajectories. 
+
+
 
