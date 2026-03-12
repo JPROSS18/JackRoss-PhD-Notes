@@ -146,8 +146,13 @@ where $\lambda(s)$ is the Lyapunov exponent of a the frozen at $r(s)$.
 For a fixed $T$, we can deduce: 
 
 $$
-\frac{d}{dL} (L\eta)= \lambda(T -L)  
+\frac{d}{dL} (L\eta)= \lambda(T -L)  \tag{3.4}
 $$
+
+
+If we apply (3.4) to $(2.5)$. 
+It reduces to $-2\sqrt{ a(T - L)}$. (True value of the lyapapunov exponent. )
+
 To compute $\frac{d}{dL} (L\eta)$:
 - $\frac{\partial f}{\partial x}$ to compute the FTLE $\eta$. 
 

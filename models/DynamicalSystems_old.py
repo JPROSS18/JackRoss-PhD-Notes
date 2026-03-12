@@ -157,15 +157,6 @@ class DynamicalSystem_torch(DynamicalSystem):
 
 #Systems
 class Lorenz(DynamicalSystem_torch): 
-    '''
-    Class to create Lorenz System. 
-
-    Params
-    --------------
-    Sigma: 
-
-    drive_rate: Rate of change of non-autonomous param. 
-    '''
     def __init__(self, sigma=10, beta=8/3, rho=28):
         super().__init__(dim=3)
         self.sigma = sigma
@@ -297,23 +288,55 @@ class DynamicalSystems_analysis:
     def __init__(self, model: DynamicalSystem_torch):
         self.model = model
 
-    def lyapunov_spectrum_f(self, t, x):
+    def variational_f(self, t, x):
+        '''
+        Function to solve the variation equations for the system, which are used to compute the Lyapunov spectrum.
+
+        Parameters:
+        - t: The current time point for the integration.
+        - x: The current state of the system, which includes both the system state and the perturbation vectors. Should be a torch tensor of shape (num trajectories, system dimension, K+1), 
+          where K is the number of perturbation vectors and the last dimension includes both the system state. 
+        
+        '''
         # Input Tensor x has shape [num trajectors, D system Dimenions, K+1 number of pertubation vectors and i.c for system] 
-        x_vals = x[:, :, -1] #system state is the last column of input, shape (num trajectories, system dimension
-         # Expecting (num trajectories, system dimension)
-        Y_vals = x[:, :, 0:-1] #pertubation vectors are the first K columns of input, shape (num trajectories, system dimension, K)
+
+
+        
+
+        x_vals = x[:, :, -1] #system state is the last column of input, shape (num trajectories, system dimension)
+        t, x_vals =  self.model.f_tests(t, x_vals) #Ensure x_vals is in correct format for f, and get t in correct format for f. 
         dxdt = self.model.f(t, x_vals).unsqueeze(2) # shape (num trajectories, system dimension, 1)
 
+
+        Y_vals = x[:, :, 0:-1] #pertubation vectors are the first K columns of input, shape (num trajectories, system dimension, K)
+
+        # Getting Jacobian Function
         jac_func = torch.func.vmap(torch.func.jacrev(lambda x, t=t: self.model.f(t, x))) 
 
-        J = jac_func(x_vals)[:, 0, :, :] # shape (num trajectories, system dimension, system dimension)
+
+        J = jac_func(x_vals)[:, 0, :, :] # shape (num trajectories, system dimension,  system dimension)
         dYdt = J @ Y_vals # shape (num trajectories, system dimension, system dimension) @ (num trajectories, system dimension, K) -> (num trajectories, system dimension, K)
     
-        return torch.cat([dYdt, dxdt], dim=2)
+        return torch.cat([dYdt, dxdt], dim=2) # shape (num trajectories, system dimension, K+1)
         
 
 
     def lyapunov_spectrum(self, x0 = torch.ones(1, 3, 1, dtype=torch.float32),  k=1, t0 = 0, dt = 0.01, t_transient_pts = 100, num_pts_compute = 1_000, non_autonomous = False):
+        '''
+        Computes the Lyapunov spectrum for the given model and initial condition.
+
+        Parameters:
+        - x0: The initial condition for the system. Should be a torch tensor.
+        - k: The number of perturbation vectors to use.
+        - t0: The initial time.
+        - dt: The time step for integration.
+        - t_transient_pts: The number of transient points to discard.
+        - num_pts_compute: The number of points to compute the spectrum for.
+        - non_autonomous: Whether the system is non-autonomous.
+
+        Returns:
+        - lyapunov_spectrum_out: The computed Lyapunov spectrum.
+        '''
         #Step size for integration
         t_step = torch.arange(t0, t0 + 2*dt, dt, dtype=torch.float32)
         t_pts_transient = t_transient_pts
@@ -339,7 +362,7 @@ class DynamicalSystems_analysis:
         r_vals = []
         for i in tqdm(range(num_pts_compute), desc = "Computing Lyapunov Spectrum"):
        
-            output = odeint(func=self.lyapunov_spectrum_f, y0=input_new, t=(t_step + (dt*i)), method='rk4', options={'step_size': dt})
+            output = odeint(func=self.variational_f, y0=input_new, t=(t_step + (dt*i)), method='rk4', options={'step_size': dt})
             Y_step = output[-1, :, :, 0:-1]
             x_step = output[-1, :, :, -1] # shape (num trajectories, system dimension)
 

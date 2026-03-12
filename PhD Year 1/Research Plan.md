@@ -2,7 +2,7 @@
 
 In recent years, scientific machine learning has revolutionised the potential of data-driven modelling in scientific study. 
 
-For decades, dynamical systems theory has provided the theoretical foundation for for the mathematical study of time varying system.s 
+For decades, dynamical systems theory has provided the theoretical foundation for for the mathematical study of time varying system.
 
 However, the interaction between these fields has often been limited. Im particular, using simplier machine learning architectures, such as reservoir computers. 
 
@@ -16,7 +16,13 @@ In particular, we hope to focus on *non-autonomous dynamical systems*.
 1. Optimise current machine learning architectures for learning of non-autonomous systems. 
 2. Use existing dynamical systems theory in order to study the dynamics of reconstructed systems. 
 
+Can statistics, such as instantaneous Lyapunov exponents be used to measure the convergence of 
 [@janosi_overview_2024] Finite Time Theory of Non-autonomous Dynamical Systems with a parameter drift. 
+
+Can statistics, such as instantaneous Lyapunov exponents be used to measure the convergence of dynamics ?
+
+
+
 
 [@louwLearningClimateDynamical2025] Rigorous approach to learning dynamical systems (from measure-theoretic perspective.)
 
@@ -33,6 +39,10 @@ The study of critical transitions using purely data-driven approaches is difficu
 Additionally, existing methods for the analysis of critical transitions -(early warning signals and related), are difficult int he non-autonomous case due to limited data. 
 
 We hope to investigate if machine learning approaches can reconstruct non-autonomous dynamical systems experiencing *dynamic bifurcations*, with possible extensions to *noise* and *rate-induced* critical transitions.  
+
+Can Multiscale Methods be used to extract parameters? 
+
+The existing theory generally using machine learning to directly extrapolate past bifurcation point. We hope to use dynamical systems theory to develop more reliable methods with uncertainity quanitifcation to complete this task. 
 
 
 
@@ -66,6 +76,8 @@ However, neural ODE's are a more natural choice for learning dynamic critical tr
 
 1. Introduce optimal neural differential equations architectures for learning non-autonomous systems, in particular systems which undergo a critical transition. 
 2. Intro quantitive methods from based on dynamical systems theory which assess the reconstructed dynamics in the neural differential equation 
+
+
 
 Related Literature:
 [@chenNeuralOrdinaryDifferential2018] Introduced Neural ODE

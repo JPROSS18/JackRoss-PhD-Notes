@@ -20,3 +20,26 @@ $$
 $\lambda$ is learned by another reservoir 
 
 Very good papers - include in literature review 
+
+**Learning Slow Dynamics:**
+$$
+\begin{aligned}
+& \dot r = \alpha r + (1 - \alpha)\tanh(Mr + W_{in} x  + b) \\
+\end{aligned}
+$$
+Take a reservoir with a very high leak rate ($\alpha \approx 0.995$). 
+
+Take a moving average each node $r_i$, then calculate the standard deviation around each node. Node with smallest standard deviation correspond the slowly varying dynamics. 
+
+Call these nodes $r^{s}_i$ and take the average of the absolute values at each $t$
+
+$$
+r^s = \frac{1}{N_s} \sum_{i \in S} |r^s_i|
+$$
+Then as a linear filter to $r^s$ and feed into fast reservoir. 
+
+**LInear Filter:**
+
+
+
+
