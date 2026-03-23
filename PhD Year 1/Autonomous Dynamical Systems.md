@@ -1,14 +1,3 @@
-Notes + Thoughts + Ideas
-
-Kloeden and Rasmussen 2011 
-
-Chapters 1 - 3
-
-Chapter 8 on Bifurcations
-
-Chapter 11 on discretisations 
-
-# Autonomous Dynamical Systems
 
 Continuous time autonomous dynamical systems can be represented in the form 
 $$
@@ -74,7 +63,33 @@ $$
 The alpha limit set is defined similarly for reverse time. 
 
 
-Alternative Definitions of
+Alternative Definitions of alpha and omega limit sets:
+
+**Proposition 4.19 (Alternative characterisation of limit sets).**
+
+Consider the flow $\varphi$ of the differential equation (4.17), and let $x \in D$.  
+Then we have
+$$
+\omega(x) = \bigcap_{t \ge 0} \overline{\{\, \varphi(s, x) : s \ge t \,\}}
+$$
+and
+$$
+\alpha(x) = \bigcap_{t \le 0} \overline{\{\, \varphi(s, x) : s \le t \,\}}.
+$$
+**Proposition 4.21 (Properties of omega and alpha limit sets).**
+
+Consider the differential equation (4.17), and let $x \in D$. Then the following
+statements hold.
+
+(i) The omega limit set $\omega(x)$ is invariant. In addition, if the forward
+orbit $O^+(x)$ is bounded and $O^+(x) \subset D$, then $\omega(x)$ is
+non‑empty and compact.
+
+(ii) The alpha limit set $\alpha(x)$ is invariant. In addition, if the backward
+orbit $O^-(x)$ is bounded and $O^-(x) \subset D$, then $\alpha(x)$ is
+non‑empty and compact.
+
+
 **Exercise 1.10:** Completed apart from final part (cts time implies connect $\omega$-limit sets)
 
 **Exercise 1.11:** Not Completed

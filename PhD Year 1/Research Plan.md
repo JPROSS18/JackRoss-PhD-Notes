@@ -1,6 +1,6 @@
 # Scientific Machine Learning for Non-Autonomous Dynamical Systems. 
 
-In recent years, scientific machine learning has revolutionised the potential of data-driven modelling in scientific study. 
+In recent years, the advent of easily trainable neural networks has lead to a revolution in scientific machine learning has revolutionised the potential of data-driven modelling in scientific study. 
 
 For decades, dynamical systems theory has provided the theoretical foundation for for the mathematical study of time varying system.
 
@@ -85,6 +85,8 @@ Related Literature:
 [@liuNeuralSDEStabilizing2019] Introduce Stochastic Neural ODE
 
 [@chakrabortyDivideConquerLearning2024] Neural ODE for chaotic dynamical systems. 
+
+[[@wohrer_tracking_2026]] Tracking Finite Time Lyapunov Exponents to robustify Neural ODE's 
 
 ## Sleep-onset Period
 Additionally, we intend to explore the direct application of this work to the study of the sleep on-set period. This noisy non-autonomous system which models the transition from wake to sleep in humans. This data will be used to assess the effectiveness of the our methods. 

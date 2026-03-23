@@ -1,4 +1,44 @@
 
+A bifurcation is when a small change in a parameter of dynamical system leads to a qualitative change in system behavoir. 
+
+When the system behaviour can be fully understood by through analysis of only a neighbourhood of the bifurcating limit set, it is called a *local bifurcation*. Otherwise it is referred to as a *global bifurcation*.
+
+Global Bifurcations generally occur when larger invariant sets collide and a global impact. For example, the *homoclinic bifurcation* occurs when a limit cycle collides with a saddle and is destroyed. 
+
+When a chaotic attractor is involved, bifurcations are often called a *crisis*. For example the *boundary crisis* occurs when a choatic attractor intersects with its own basin of attraction. 
+
+What is a choatic saddle?
+A chaotic saddle is an unstable chaotic attractor. All nearby trajectory will diverge from it. 
+
+(Due to fractal nature of such an invariant set,all trajectories will diverge from chaotic saddle almost surely (choatic attractors are dense with unstable periodic orbits (may not be correct reason.).
+
+Chaotic Saddles lead to *transient choas*.
+
+*Interior Crisis* is causes when the chaotic attractor collides with a unstable invariant set within the basin of attraction. 
+
+When two chaotic attractors merge, it is called an *attractor merging crisis*. 
+
+# Diagrams:
+
+**Orbit:**
+In practice, orbit and bifurcation diagrams often coincide. 
+
+In an orbit diagram, allows system to evolve beyond transient for parameter and plot motion (only plots invariant sets). 
+
+Orbit Diagrams do not distinguish between chaotic and quasiperiodic motion as both can fill the real line. However, nearby trajectories will not diverge in quasiperiodic motion. 
+
+It is necessary to use a Poincaré section to compute the orbit diagram of a continuous system. 
+
+Downsides:Orbit Diagrams do not campture repelling sets. 
+
+**Bifurcation Diagram:**
+
+Bifurcation Diagrams shows the evolution of fixed points and their stability. Numerically, solutions are found as a root finding problem.
+
+Solutions can be found iteravely using newtons method in low dimensions or by [[Numerical Continuation]] numerical continuation in higher dimensions. 
+
+
+# Local vs Global Bifurcation
 
 
 #### Categories
@@ -11,6 +51,8 @@ Trans critical
 
 Homoclinic
 Heteroclinic
+
+
 
 ## Hopf Bifurcation 
 
