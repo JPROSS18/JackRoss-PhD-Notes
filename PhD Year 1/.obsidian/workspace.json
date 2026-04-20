@@ -147,14 +147,74 @@
             "id": "bf34ac02d41568f4",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "Maths Wiki/Universal Differential Equations (UDEs).md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "Universal Differential Equations (UDEs)"
+            }
+          },
+          {
+            "id": "0dc0bf2cc48cef75",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Literature/@habib_predicting_2023.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "@habib_predicting_2023"
+            }
+          },
+          {
+            "id": "1de07334ed099cc2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Physical Generative Modelling.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Physical Generative Modelling"
+            }
+          },
+          {
+            "id": "0c4612f7f08557d7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Maths Wiki/Basic Probability Theory.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Basic Probability Theory"
+            }
+          },
+          {
+            "id": "37f085c2157c26ac",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Literature/@ashwinTippingPointsOpen2012.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "@ashwinTippingPointsOpen2012"
             }
           }
         ],
-        "currentTab": 10
+        "currentTab": 13
       }
     ],
     "direction": "vertical"
@@ -200,7 +260,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "lyapunov",
+                "query": "rate",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -221,7 +281,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "horizontal",
@@ -328,13 +389,27 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "bf34ac02d41568f4",
+  "active": "0c4612f7f08557d7",
   "lastOpenFiles": [
-    "Courses/DDDS/Data-Driven Polynomial Optimisation.md",
-    "Courses/Random Dynamical Systems/Random Dynamical Systems.md",
-    "Courses/Random Dynamical Systems/Introduction.md",
-    "Dynamic Bifurcations.md",
+    "Literature/@ashwinTippingPointsOpen2012.md",
+    "Excalidraw/Drawing 2026-04-16 13.50.51.excalidraw.md",
+    "Maths Wiki/Basic Probability Theory.md",
     "Courses/Probabilistic Generative Models/Deep Latent Variable Models.md",
+    "Courses/Random Dynamical Systems/Random Dynamical Systems.md",
+    "Courses/Random Dynamical Systems/Ergodic Theory.md",
+    "Courses/Random Dynamical Systems/Introduction.md",
+    "Physical Generative Modelling.md",
+    "Research Plan.md",
+    "Advanced Research Plan.md",
+    "Literature/@habib_predicting_2023.md",
+    "Maths Wiki/rate induced tipping.md",
+    "Literature/Using Machine Learning To Anticipate Tipping Points and To Extrapolate To Post-Tipping Point Dynamics of Non-Stationary Dynamical Systems.md",
+    "R-tipping.md",
+    "Untitled 7.md",
+    "Untitled 6.md",
+    "Maths Wiki/Universal Differential Equations (UDEs).md",
+    "Courses/DDDS/Data-Driven Polynomial Optimisation.md",
+    "Dynamic Bifurcations.md",
     "Courses/Probabilistic Generative Models/Probabilitic G.md",
     "Courses/Probabilistic Generative Models",
     "Autoencoder Neural Networks.md",
@@ -343,22 +418,8 @@
     "Maths Wiki/Numerical Continuation.md",
     "Maths Wiki/Bifurcation.md",
     "Maths Wiki/Non-Autonomous Dynamical Systems.md",
-    "Research Plan.md",
-    "Autonomous Dynamical Systems.md",
-    "Hyperbolicity.md",
     "Courses/DDDS",
     "Untitled 7.canvas",
-    "Untitled 5.md",
-    "Excalidraw/Drawing 2026-03-17 14.43.17.excalidraw.md",
-    "Untitled 4.md",
-    "Literature/@wohrer_tracking_2026.md",
-    "[@panahiUnsupervisedLearningAnticipating2025].md",
-    "Courses/Random Dynamical Systems/Ergodic Theory.md",
-    "Maths Wiki/Proper Orthogonal Decomposition (POD).md",
-    "Maths Wiki/Koopman Operator.md",
-    "Maths Wiki/CSD.md",
-    "Invariant Measures for Machine Learning.md",
-    "Lyapunov Delay Project.md",
     "Users/jackr/Library/CloudStorage/OneDrive-ImperialCollegeLondon",
     "Users/jackr/Library/CloudStorage",
     "Users/jackr/Library",
