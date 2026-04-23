@@ -46,6 +46,8 @@ The existing theory generally using machine learning to directly extrapolate pas
 
 
 
+
+
 Related Literature: 
 [@wieczorek_rate-induced_2023] Rate Induced tipping 
 
@@ -77,7 +79,7 @@ However, neural ODE's are a more natural choice for learning dynamic critical tr
 1. Introduce optimal neural differential equations architectures for learning non-autonomous systems, in particular systems which undergo a critical transition. 
 2. Intro quantitive methods from based on dynamical systems theory which assess the reconstructed dynamics in the neural differential equation 
 
-
+Additionally, an interesting area of study could rigiours approximation of ODE's using neural ODE's? Does some kind of approximation theory exist for this kind of problem?
 
 Related Literature:
 [@chenNeuralOrdinaryDifferential2018] Introduced Neural ODE
@@ -100,4 +102,11 @@ Related Literature:
 [@huLearningBistableCortical] Paper which fits noisy bifurcation model to individual sleep trajectories. 
 
 
+
+# Ideas To Think about:
+
+Error bounds on Neural of ODes
+Sindy for non-autonomous systems?
+
+Geometric prior to contrain bifurcation?
 
