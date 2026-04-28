@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "494eda3113d3bfdf",
+        "id": "3a45cd034b4aad25",
         "type": "tabs",
         "children": [
           {
-            "id": "4f82c74dadd16bc3",
+            "id": "b81348573a11df4c",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "Stochastic Processes.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "Stochastic Processes"
             }
           }
         ]
@@ -63,7 +67,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "indisguisable",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -192,8 +196,9 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "4f82c74dadd16bc3",
+  "active": "b81348573a11df4c",
   "lastOpenFiles": [
+    "Stochastic Processes.md",
     "Maths Wiki/Basic Probability Theory.md",
     "Maths Wiki/Sparse identification of non-linear dynamics (SINDy).md",
     "Untitled 5.md",
@@ -219,7 +224,6 @@
     "Maths Wiki/CSD.md",
     "Maths Wiki/Finite-Time Lyapunov Exponents.md",
     "Maths Wiki/Ensemble Averaged Pairwise Distance (EAPD).md",
-    "Maths Wiki/Bifurcation.md",
     "Courses/Probabilistic Generative Models",
     "Courses/DDDS",
     "Untitled 7.canvas",
