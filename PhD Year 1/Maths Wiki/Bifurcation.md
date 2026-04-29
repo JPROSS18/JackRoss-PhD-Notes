@@ -1,23 +1,48 @@
 
-A bifurcation is when a small change in a parameter of dynamical system leads to a qualitative change in system behavoir. 
+A bifurcation is when a small change in a parameter of dynamical system leads to a qualitative change in system behaviour. 
 
+
+
+**Global vs Local Bifurcations:**
 When the system behaviour can be fully understood by through analysis of only a neighbourhood of the bifurcating limit set, it is called a *local bifurcation*. Otherwise it is referred to as a *global bifurcation*.
 
 Global Bifurcations generally occur when larger invariant sets collide and a global impact. For example, the *homoclinic bifurcation* occurs when a limit cycle collides with a saddle and is destroyed. 
 
-When a chaotic attractor is involved, bifurcations are often called a *crisis*. For example the *boundary crisis* occurs when a choatic attractor intersects with its own basin of attraction. 
 
-What is a choatic saddle?
-A chaotic saddle is an unstable chaotic attractor. All nearby trajectory will diverge from it. 
+**Chaotic Systems:**
+When a chaotic attractor is involved, bifurcations are often called a *crisis*. 
 
-(Due to fractal nature of such an invariant set,all trajectories will diverge from chaotic saddle almost surely (choatic attractors are dense with unstable periodic orbits (may not be correct reason.).
-
-Chaotic Saddles lead to *transient choas*.
+For example the *boundary crisis* occurs when a chaotic attractor intersects with its own basin of attraction. 
 
 *Interior Crisis* is causes when the chaotic attractor collides with a unstable invariant set within the basin of attraction. 
 
 When two chaotic attractors merge, it is called an *attractor merging crisis*. 
 
+Nonlinear Dynamics - Datseris and Parlitz
+
+***What is a chaotic saddle?***
+A chaotic saddle is an unstable chaotic attractor. All nearby trajectory will diverge from it. 
+
+(Due to fractal nature of such an invariant set, all trajectories will diverge from chaotic saddle almost surely (chaotic attractors are dense with unstable periodic orbits (may not be correct reason.).
+
+Chaotic Saddles lead to *transient chaos*.
+
+
+**Normal Forms:**
+
+Bifurcations can be studied in term of their [[Normal Forms of Bifurcations |normal forms]], canonical examples which a topologically equivalent to all other bifurcations of that class.
+
+# Local:
+
+Degeneracy condition: 
+
+A bifurcation point is considered non-degerate 
+Consider a scalar differential equation defined by $\dot x = f(r, x)$  which has a fixed point at $(x, r) = (0, 0)$ where:
+$$
+\frac{\partial f}{\partial x} (0, 0)= 0, \quad \frac{\partial^2 f}{\partial x^2} (0, 0)\neq 0, \quad \frac{\partial f}{\partial r} (0, 0) \neq 0, \quad 
+$$
+
+Then this point is a non-degenerate bifurcation point. 
 # Diagrams:
 
 **Orbit:**
@@ -29,16 +54,16 @@ Orbit Diagrams do not distinguish between chaotic and quasiperiodic motion as bo
 
 It is necessary to use a Poincaré section to compute the orbit diagram of a continuous system. 
 
-Downsides:Orbit Diagrams do not campture repelling sets. 
+Downsides:Orbit Diagrams do not capture repelling sets. 
 
 **Bifurcation Diagram:**
 
 Bifurcation Diagrams shows the evolution of fixed points and their stability. Numerically, solutions are found as a root finding problem.
 
-Solutions can be found iteravely using newtons method in low dimensions or by [[Numerical Continuation]] numerical continuation in higher dimensions. 
+Solutions can be found iteratively using newtons method in low dimensions or by [[Numerical Continuation]] numerical continuation in higher dimensions. 
 
 
-# Local vs Global Bifurcation
+
 
 
 #### Categories
@@ -54,50 +79,8 @@ Heteroclinic
 
 
 
-## Hopf Bifurcation 
-
-$$
-\begin{aligned}
-\dot r = r (\rho + \alpha r^2) \\
-\dot \theta = \omega + \beta r^2
-\end{aligned}
-$$
-
-$\dot r = 0$ when $r = 0, \sqrt{-\frac{\rho}{\alpha}}$
-
-**In Cartesian co-ords:** 
-
-$$
-\begin{align}
-\dot x = \rho x - \omega y + (\alpha x - \beta y)(x^2 + y^2) \\
-\dot y = \omega x + \rho y + (\beta x + \alpha y)(x^2 + y^2)
-\end{align}
-$$
-
-Which is linearised as:
-$$
-\begin{align}
-\dot x = \rho x - \omega y \\
-\dot y = \omega x + \rho y 
-\end{align}
-$$
-Jacobian:
-
-
-$$ J = \begin{pmatrix} \rho & -1 \\ 1 & \rho \end{pmatrix} $$
-Eigenvalues:
-$$
-\lambda_{1,2} = \rho \pm \omega i
-$$
-
-
-The hopf bifurcation can be divided into supercritical ($\alpha < 0$ stable limit cycle) and subcritical ($\alpha > 0$ ). Similar to the pitchfork bifurcation 
-
-**Subcritical ($\alpha$ >0):**
-
-
-
-**Supercritical ($\alpha < 0$):**
+[[ Hopf Bifurcation]]
+**
 
 
 

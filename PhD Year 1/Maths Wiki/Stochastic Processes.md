@@ -1,4 +1,6 @@
+Part of notes on Stochastic Differential Equations and Applications by Xuerong Mao. 
 
+Other notes include: [[Basic Probability Theory]], [[Brownian Motion]]
 # Key Definitions
 Let $(\Omega, \mathcal F, P)$ be a probability space. 
 
@@ -97,5 +99,51 @@ is also an $\{ \mathcal F_t \}$-stopping time and is called the *first exist tim
 
  ## Martingales
 
+An $\mathbb R^d$-valued $\{ \mathcal F_t \}$-adapted integrable process $\{ M_t \}_{t \geq 0}$ is called a *martingale* with respect to $\{ \mathcal F_t \}$ if
+$$
+E(M_t \ | \ \mathcal F_s) = M_s, \quad a.s. \ \forall  t, s , \ 0 \leq s < t < \infty
+$$
+
+If $\{ X_t \}_{t \geq 0}$ is a progressive process and $\tau$ is a stopping time. The $\{ X_{\tau \wedge t} \}_{t \geq 0}$. 
+
+# Definitions
+
+A stochastic processes is called *square integrable* if $E|X_t|^2 < \infty$ for every $t \geq 0$. I
+
+If $\{ M_t \}_{t \geq 0}$ is a real-valued square integrable continuous martingale, there exists a unique, adapted, integrable increasing process $\{ \langle M, M \rangle \}_{t \geq 0}$. such that $\{ M^2_t - \langle M, M \rangle \}_{t \geq 0}$ is a continuous martingale vanishing at $t=0$. 
+
+The process $\{ \langle M, M \rangle \}_{t \geq 0}$, is called a *quadratic variation*.
+
+In particular, for any finite stopping time $\tau$, 
+$$
+EM^2_\tau = E\langle M, M \rangle_\tau
+$$
+If $\{ N_t \}_{t \geq 0}$ is another real-valued square integrable continuous martingale. Definite its *joint quadratic variation* as:
+$$
+\langle M, N \rangle_t = \frac{1}{2} \left( \langle M +N, M + N \rangle_t - \langle M, M \rangle \}_{t} - \langle N, N \rangle_t \right)
+$$
+This is the unique continuous integrable adapted process of finite variation such that $\{ M_t N_t - \langle M, M \rangle \}_{t \geq 0}$ is a continuous martingale vanishing at 0. Similarly, 
+$$
+EM_\tau N_\tau = E\langle M, N \rangle_\tau
+$$
+
+A process is called a *local martingale* is there exists a nondecreasing sequence $\{ \tau_k \}_{k \geq 1}$ of stopping times where $\tau_k \to \infty$ and $\{ M_{\tau_k \wedge t} - M_0\}$ is a  martingale. 
+
+Every martingale is a local martingale. Similar results for quadratic variation exist for local martingales. 
 ## Martingale Theorems:
+
+**Theorem:** (Doob Martingale Stopping Theorem)
+
+
+Let $\{ M_t \}_{t \geq 0}$ be a *martingale* with respect to $\{ \mathcal F_t \}$ and let $\theta$ and $\rho$ be stopping times. Then;
+$$
+E(M_\theta \ | \ \mathcal F_\rho ) = M_{\theta \wedge \rho}  \quad a.s.
+$$
+
+In particular, if $\tau$ is a stopping time, then
+$$
+E(M_{ \tau \wedge t}\ | \ \mathcal F_s ) = M_{\tau \wedge s}  \quad a.s.
+$$
+A stopped martingale is still a martingale. 
+
 
