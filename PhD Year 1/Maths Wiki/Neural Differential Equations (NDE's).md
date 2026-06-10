@@ -290,7 +290,7 @@ Downside:
 
 Will ANODE's perform worse when learning a vector field ? It should 
 
-
+[[Machine Learning on Manifolds]]
 ### Neural ODE's for Chaotic Dynamics 
 Discussed in [[chakrabortyDivideConquerLearning2024 | Chakraborty et al (2024)]]. 
 

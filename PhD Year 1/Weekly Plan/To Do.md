@@ -28,7 +28,7 @@ What is a cusp bifrucation + other types of bifurcations ??
 
 Operator Learning + how would it work for ODE's?
 
-
+Computational complexity increses as neural odes are trained - should not be too much greater than orignal ode
 
 # Current Long Term Reading:
 
