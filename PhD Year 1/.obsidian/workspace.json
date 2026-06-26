@@ -13,15 +13,54 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Maths Wiki/Tipping in Dynamical Systems.md",
+                "file": "Maths Wiki/Early Warning Signals.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Tipping in Dynamical Systems"
+              "title": "Early Warning Signals"
+            }
+          },
+          {
+            "id": "5472f0beb037138a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Maths Wiki/Saddle Node (Fold) Bifurcation.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Saddle Node (Fold) Bifurcation"
+            }
+          },
+          {
+            "id": "5a9f02e826449e6b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "2026-06-26.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2026-06-26"
+            }
+          },
+          {
+            "id": "0159c976e8c2460f",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -195,16 +234,26 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "362704bd58d6d83a",
+  "active": "5a9f02e826449e6b",
   "lastOpenFiles": [
+    "Maths Wiki/Saddle Node (Fold) Bifurcation.md",
+    "2026-06-26.md",
+    "Maths Wiki/Stochastic Processes/SDE.md",
+    "Maths Wiki/Stochastic Processes/Basic Probability Theory.md",
+    "Maths Wiki/Stochastic Processes",
+    "Maths Wiki/Stochastic Processes/Stochastic Processes.md",
+    "Maths Wiki/Stochastic Processes/Brownian Motion.md",
+    "2026-06-22.md",
+    "2026-06-19.md",
+    "Maths Wiki/Persistant Homology.md",
     "Maths Wiki/Early Warning Signals.md",
     "Maths Wiki/Tipping in Dynamical Systems.md",
+    "Autoregessive Models.md",
     "Chebyshev polynomials.md",
     "Maths Wiki/Numerical Analysis.md",
     "Courses/Random Dynamical Systems/Ergodic Theory.md",
     "Week 5.md",
     "Maths Wiki/Transformers.md",
-    "Maths Wiki/Saddle Node (Fold) Bifurcation.md",
     "Machine Learning for Critical Transitions.md",
     "Literature/‪Machine Learning for Predicting Non-Stationary Dynamical Systems, and Global Subseasonal-to-Seasonal Weather Phenomena‬.md",
     "Machine Learning on Manifolds.md",
@@ -214,15 +263,6 @@
     "Maths Wiki/Neural Differential Equations (NDE's).md",
     "Reading List.md",
     "Application to Summer School.md",
-    "Untitled 11.md",
-    "Maths Wiki/Stochastic Processes.md",
-    "Maths Wiki/Brownian Motion.md",
-    "Topological Conjugacies.md",
-    "Literature/@zhornyak_inferring_2024.md",
-    "Literature/@panahi_unsupervised_2025.md",
-    "Literature/@tegelen_neural_2025.md",
-    "Sleep Dynamics Literature Review.md",
-    "Untitled 10.md",
     "Courses/Probabilistic Generative Models",
     "Courses/DDDS",
     "Untitled 7.canvas",
@@ -240,7 +280,6 @@
     "Untitled 2.canvas",
     "Untitled 1.canvas",
     "Untitled.canvas",
-    "Weekly Plan/2025",
     "templates_pdf/Pasted image 20251027120006.png",
     "templates_pdf/Pasted image 20251027130854.png",
     "Misc/Pasted image 20251023181058.png",

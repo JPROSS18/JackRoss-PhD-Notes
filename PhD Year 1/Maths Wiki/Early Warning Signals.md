@@ -62,3 +62,5 @@ The idea of the 'skill' of an early warning signal was proposed in:
 
 Use ROC curve methods to quantify usefulness and accuracy of EWS for predicting future tipping. 
 
+Coditions for skill-full prediction:
+https://iopscience.iop.org/article/10.1088/2632-072X/ae6217/meta

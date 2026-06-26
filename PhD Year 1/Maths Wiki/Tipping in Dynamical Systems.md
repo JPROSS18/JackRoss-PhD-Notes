@@ -27,4 +27,8 @@ Tipping points can offer great risks to climate ([McKay et al 2022](https://www.
 [[Early Warning Signals]]
 # Applications
 
+**Ecological Systems:**
+https://arxiv.org/pdf/2602.20702
+
+
 
